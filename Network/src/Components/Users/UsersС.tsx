@@ -10,10 +10,18 @@ class Users  extends  React.Component<UsersPropsType> {
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`)
                 .then(response => {
                 this.props.setUsers(response.data.items)
+                    this.props.setTotalUserCount(response.data.totalUsersCount)
             });
         }
 
 
+onPageChanged = (pageNumber:number) => {
+      this.props.setCurrentPage(pageNumber)
+          axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.usersPage.pageSize}`)
+              .then(response => {
+                  this.props.setUsers(response.data.items)
+              });
+}
 
 render() {
 
@@ -28,7 +36,7 @@ for (let i = 1; i <= pagesCount; i++){
        <div>
            {pages.map(p => {
             return   <span className={this.props.usersPage.currentPage ===p ? s.selectedPage: ''}
-                           onClick={()=>{this.props.setCurrentPage(p)}}>{p}</span>
+                           onClick={(e)=>{this.onPageChanged(p)}}>{p}</span>
            })}
 
        </div>
