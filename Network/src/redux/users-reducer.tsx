@@ -1,7 +1,11 @@
-export type UsersFollowType = followType|unfollowType|setUsersType
+export type UsersFollowType = followType|unfollowType|setUsersType|setCurrentPageAC
 export type followType = ReturnType<typeof followAC>
 export type unfollowType = ReturnType<typeof unfollowAC>
 export type setUsersType = ReturnType<typeof setUsersAC>
+export type setCurrentPageAC = ReturnType<typeof setCurrentPageAC>
+
+
+
 export type UsersType = {
     name: string,
     id: number,
@@ -30,14 +34,14 @@ export type UsersType = {
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
-
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 
 
 let initialStateUsers:InitialStateUsersType = {
     users: [ ],
     pageSize:5,
-    totalUsersCount:50,
-    currentPage: 1
+    totalUsersCount:51,
+    currentPage: 2
 
 }
 export type InitialStateUsersType = {
@@ -76,6 +80,11 @@ export const usersReducer = (state:InitialStateUsersType = initialStateUsers , a
                 ...state,
                 users:[...action.users]
             }
+        case SET_CURRENT_PAGE:
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
         default:
             return state
     }
@@ -97,5 +106,11 @@ export const setUsersAC= (users:Array<UsersType> ) => {
     return {
         type:SET_USERS,
         users:users
+    } as const
+}
+export const setCurrentPageAC= (currentPage: number ) => {
+    return {
+        type:SET_CURRENT_PAGE,
+        currentPage:currentPage
     } as const
 }
