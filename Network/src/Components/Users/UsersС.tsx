@@ -13,8 +13,7 @@ class Users  extends  React.Component<UsersPropsType> {
                 this.props.setUsers(response.data.items)
             });
         }
-/////
-////
+//asdqeqeads
 
 render() {
    return <div >
