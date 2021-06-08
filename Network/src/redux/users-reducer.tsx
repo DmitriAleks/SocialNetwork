@@ -36,13 +36,15 @@ const SET_USERS = 'SET-USERS'
 let initialStateUsers:InitialStateUsersType = {
     users: [ ],
     pageSize:5,
-    totalUsersCount:0
+    totalUsersCount:50,
+    currentPage: 1
 
 }
 export type InitialStateUsersType = {
     users:Array<UsersType>
     pageSize: number
     totalUsersCount: number
+    currentPage: number
 }
 
 
