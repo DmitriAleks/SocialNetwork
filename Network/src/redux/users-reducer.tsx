@@ -1,9 +1,11 @@
-export type UsersFollowType = followType | unfollowTypeAT | setUsersTypeAT | setCurrentPageAT | setTotalUserCountAT
+export type UsersFollowType = followType | unfollowTypeAT | setUsersTypeAT | setCurrentPageAT | setTotalUserCountAT|setToggleIsFetchingAT
 export type followType = ReturnType<typeof followAC>
 export type unfollowTypeAT = ReturnType<typeof unfollowAC>
 export type setUsersTypeAT = ReturnType<typeof setUsersAC>
 export type setCurrentPageAT = ReturnType<typeof setCurrentPageAC>
 export type setTotalUserCountAT = ReturnType<typeof setTotalUserCountAC>
+export type setToggleIsFetchingAT = ReturnType<typeof setToggleIsFetchingAC>
+
 
 
 export type UsersType = {
@@ -24,7 +26,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
 const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
-
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
 
 let initialStateUsers: InitialStateUsersType = {
     users: [],
@@ -80,6 +82,11 @@ export const usersReducer = (state: InitialStateUsersType = initialStateUsers, a
                 ...state,
                 totalUsersCount: action.totalCount
             }
+        case TOGGLE_IS_FETCHING:
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
         default:
             return state
     }
@@ -113,6 +120,12 @@ export const setTotalUserCountAC = (totalCount: number) => {
     return {
         type: SET_TOTAL_USERS_COUNT,
         totalCount: totalCount
+    } as const
+}
+export const setToggleIsFetchingAC = (getFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        isFetching: getFetching
     } as const
 }
 
