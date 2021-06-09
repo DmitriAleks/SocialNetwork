@@ -13,6 +13,7 @@ import {AppStateType} from '../../redux/redux-store';
 import axios from "axios";
 import Users from "./Users";
 import loader from '../../assets/images/loading-.gif'
+import Preloader from "../common/Preloader/Preloader";
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
@@ -38,7 +39,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
     render() {
         return<>
-            {this.props.usersPage.isFetching ? <div><img src={loader} style={{backgroundColor: 'white'}}/></div>  : null}
+            {this.props.usersPage.isFetching ? <Preloader/>  : null}
             <Users totalUsersCount={this.props.usersPage.totalUsersCount}
                       pageSize={this.props.usersPage.pageSize}
                       currentPage={this.props.usersPage.currentPage}
