@@ -12,7 +12,7 @@ import {Dispatch} from "redux";
 import { AppStateType } from '../../redux/redux-store';
 import axios from "axios";
 import Users from "./Users";
-class UsersAPIComponent  extends  React.Component<UsersPropsType> {
+class UsersContainer  extends  React.Component<UsersPropsType> {
     componentDidMount(){
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`)
             .then(response => {
@@ -89,5 +89,5 @@ let mapDispatchToProps = (dispatch: Dispatch):MapDispatchToPropsType => {
 
     }
 }
-const UsersContainer = connect(mapStateToProps,mapDispatchToProps )(UsersAPIComponent)
-export default UsersContainer;
+
+export default connect(mapStateToProps,mapDispatchToProps )(UsersContainer)
