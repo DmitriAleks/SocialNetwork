@@ -6,7 +6,7 @@ import {
     unfollowAC,
     InitialStateUsersType,
     UsersType,
-    setCurrentPageAC, setTotalUserCountAC
+    setCurrentPageAC, setTotalUserCountAC, setToggleIsFetchingAC
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import {AppStateType} from '../../redux/redux-store';
@@ -16,8 +16,10 @@ import loader from '../../assets/images/loading-.gif'
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
+        this.props.setToggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`)
             .then(response => {
+                this.props.setToggleIsFetching(false)
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUserCount(response.data.totalCount)
             });
@@ -25,16 +27,18 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
 
     onPageChanged = (pageNumber: number) => {
+        this.props.setToggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.usersPage.pageSize}`)
             .then(response => {
+                this.props.setToggleIsFetching(false)
                 this.props.setUsers(response.data.items)
             });
     }
 
     render() {
         return<>
-            {this.props.usersPage.isFetching ? <img src={loader} /> : null}
+            {this.props.usersPage.isFetching ? <div><img src={loader} style={{backgroundColor: 'white'}}/></div>  : null}
             <Users totalUsersCount={this.props.usersPage.totalUsersCount}
                       pageSize={this.props.usersPage.pageSize}
                       currentPage={this.props.usersPage.currentPage}
@@ -58,6 +62,7 @@ type MapDispatchToPropsType = {
     setUsers: (users: Array<UsersType>) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUserCount: (totalCount: number) => void
+    setToggleIsFetching:(getFetching:boolean)=> void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -88,6 +93,9 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         },
         setTotalUserCount: (totalCount) => {
             dispatch(setTotalUserCountAC(totalCount))
+        },
+        setToggleIsFetching: (getFetching) => {
+            dispatch(setToggleIsFetchingAC(getFetching))
         },
 
     }
