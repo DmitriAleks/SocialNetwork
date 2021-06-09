@@ -40,8 +40,8 @@ const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT"
 
 let initialStateUsers:InitialStateUsersType = {
     users: [ ],
-    pageSize:5,
-    totalUsersCount:12,
+    pageSize:10,
+    totalUsersCount:0,
     currentPage: 1,
 
 }
