@@ -12,6 +12,7 @@ import {Dispatch} from "redux";
 import {AppStateType} from '../../redux/redux-store';
 import axios from "axios";
 import Users from "./Users";
+import loader from '../../assets/images/loading-.gif'
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
@@ -32,8 +33,9 @@ class UsersContainer extends React.Component<UsersPropsType> {
     }
 
     render() {
-
-        return <Users totalUsersCount={this.props.usersPage.totalUsersCount}
+        return<>
+            {this.props.usersPage.isFetching ? <img src={loader} /> : null}
+            <Users totalUsersCount={this.props.usersPage.totalUsersCount}
                       pageSize={this.props.usersPage.pageSize}
                       currentPage={this.props.usersPage.currentPage}
                       users={this.props.usersPage.users}
@@ -42,6 +44,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
                       onPageChanged={this.onPageChanged}
 
         />
+        </>
     }
 }
 
@@ -64,7 +67,8 @@ let mapStateToProps = (state: AppStateType) => {
         usersPage: state.usersPage,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching:state.usersPage.isFetching
 
     }
 }

@@ -31,6 +31,7 @@ let initialStateUsers: InitialStateUsersType = {
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching:true
 
 }
 export type InitialStateUsersType = {
@@ -38,11 +39,11 @@ export type InitialStateUsersType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 
 export const usersReducer = (state: InitialStateUsersType = initialStateUsers, action: UsersFollowType): InitialStateUsersType => {
-    debugger
     switch (action.type) {
         case FOLLOW:
             return {
