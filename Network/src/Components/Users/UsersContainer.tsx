@@ -10,7 +10,8 @@ import {
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
 import { AppStateType } from '../../redux/redux-store';
-import Users from "./UsersС";
+import Users from "./UsersAPIComponent";
+import UsersAPIComponent from './UsersAPIComponent';
 
 type MapStateToPropsType = {
     usersPage: InitialStateUsersType
@@ -54,5 +55,5 @@ let mapDispatchToProps = (dispatch: Dispatch):MapDispatchToPropsType => {
 
     }
 }
-const UsersContainer = connect(mapStateToProps,mapDispatchToProps )(Users)
+const UsersContainer = connect(mapStateToProps,mapDispatchToProps )(UsersAPIComponent)
 export default UsersContainer;
