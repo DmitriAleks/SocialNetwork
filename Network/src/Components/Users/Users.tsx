@@ -1,24 +1,23 @@
 import React from 'react';
 import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
-import {UsersPropsType} from "./UsersContainer";
 import {UsersType} from "../../redux/users-reducer";
 
 type UsersPresentType = {
-    totalUsersCount:number,
-    pageSize:number,
-    currentPage:number,
-    users:Array<UsersType>
-    follow: (userId:number) => void
-    unfollow: (userId:number) => void
-    onPageChanged :(pageNumber:number)=> void
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
+    users: Array<UsersType>
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    onPageChanged: (pageNumber: number) => void
 }
 
 let Users = (props: UsersPresentType) => {
 
-    let pagesCount = Math.ceil (props.totalUsersCount /props.pageSize)
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = [];
-    for (let i = 1; i <= pagesCount; i++){
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
 
@@ -34,13 +33,14 @@ let Users = (props: UsersPresentType) => {
         </div>
 
         {
-           props.users.map(u => <div key={u.id}>
+            props.users.map(u => <div key={u.id}>
                     <span>
-                        <div><img src={u.photos.small !=null ? u.photos.small : userPhoto} className={s.userPhoto}/></div>
+                        <div><img src={u.photos.small != null ? u.photos.small : userPhoto}
+                                  className={s.userPhoto}/></div>
                         <div>
                             {u.followed
                                 ? <button onClick={() => {
-                                   props.follow(u.id)
+                                    props.follow(u.id)
                                 }}>Follow</button>
                                 : <button onClick={() => {
                                     props.unfollow(u.id)

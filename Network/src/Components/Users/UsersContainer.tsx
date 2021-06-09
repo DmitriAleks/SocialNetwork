@@ -9,11 +9,12 @@ import {
     setCurrentPageAC, setTotalUserCountAC
 } from "../../redux/users-reducer";
 import {Dispatch} from "redux";
-import { AppStateType } from '../../redux/redux-store';
+import {AppStateType} from '../../redux/redux-store';
 import axios from "axios";
 import Users from "./Users";
-class UsersContainer  extends  React.Component<UsersPropsType> {
-    componentDidMount(){
+
+class UsersContainer extends React.Component<UsersPropsType> {
+    componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
@@ -22,7 +23,7 @@ class UsersContainer  extends  React.Component<UsersPropsType> {
     }
 
 
-    onPageChanged = (pageNumber:number) => {
+    onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.usersPage.pageSize}`)
             .then(response => {
@@ -45,22 +46,20 @@ class UsersContainer  extends  React.Component<UsersPropsType> {
 }
 
 
-
-
 type MapStateToPropsType = {
     usersPage: InitialStateUsersType
 }
 type MapDispatchToPropsType = {
-    follow: (userId:number) => void
-    unfollow: (userId:number) => void
-    setUsers: (users:Array<UsersType>) => void
-    setCurrentPage:(pageNumber:number) => void
-    setTotalUserCount:(totalCount:number)=> void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
+    setUsers: (users: Array<UsersType>) => void
+    setCurrentPage: (pageNumber: number) => void
+    setTotalUserCount: (totalCount: number) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 
-let mapStateToProps = (state:AppStateType) =>{
+let mapStateToProps = (state: AppStateType) => {
     return {
         usersPage: state.usersPage,
         pageSize: state.usersPage.pageSize,
@@ -69,15 +68,15 @@ let mapStateToProps = (state:AppStateType) =>{
 
     }
 }
-let mapDispatchToProps = (dispatch: Dispatch):MapDispatchToPropsType => {
+let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        follow:(userId:number)=> {
+        follow: (userId: number) => {
             dispatch(followAC(userId))
         },
-        unfollow:(userId:number)=> {
+        unfollow: (userId: number) => {
             dispatch(unfollowAC(userId))
         },
-        setUsers:(users:Array<UsersType>)=> {
+        setUsers: (users: Array<UsersType>) => {
             dispatch(setUsersAC(users))
         },
         setCurrentPage: (pageNumber) => {
@@ -90,4 +89,4 @@ let mapDispatchToProps = (dispatch: Dispatch):MapDispatchToPropsType => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps )(UsersContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
