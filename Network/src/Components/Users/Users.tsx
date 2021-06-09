@@ -36,7 +36,7 @@ let Users = (props: UsersPresentType) => {
         {
            props.users.map(u => <div key={u.id}>
                     <span>
-                        <div><img src={userPhoto} className={s.userPhoto}/></div>
+                        <div><img src={u.photos.small} className={s.userPhoto}/></div>
                         <div>
                             {u.followed
                                 ? <button onClick={() => {

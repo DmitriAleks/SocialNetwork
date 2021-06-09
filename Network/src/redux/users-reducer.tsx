@@ -11,25 +11,13 @@ export type UsersType = {
     id: number,
     uniqueUrlName: null,
     photos: {
-        small: null,
-        large: null
+        small: string,
+        large: string
     },
     status: null,
     followed: boolean
 
 
-    // id: number,
-    // name: string,
-    // followed: boolean,
-    // status:string,
-    // location: {
-    //   city:string,
-    //   country: string,
-    // },
-    // photos: {
-    //     "small": string,
-    //     "large": string
-    // },
 }
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
