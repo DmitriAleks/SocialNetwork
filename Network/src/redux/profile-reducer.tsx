@@ -1,7 +1,10 @@
-import {ActionsTypes} from "./store";
+
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextType | setUserProfile
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCreator>
+export type setUserProfile = ReturnType<typeof setUserProfile>
+
 export type PostType = {
     id: number,
     message: string,
@@ -10,6 +13,7 @@ export type PostType = {
 }
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST = 'ADD-POST'
+const SET_USER_PROFILE = 'SET-USER-PROFILE'
 
 
 let initialState = {
@@ -39,7 +43,8 @@ let initialState = {
             avatar: "https://images.boosty.to/user/822986/avatar?change_time=1593874069&croped=1&mh=150&mw=150"
         },
     ] as Array<PostType>,
-    newPostText: ''
+    newPostText: '',
+    profile: null
 }
 export type InitialStateType = typeof initialState
 
@@ -62,6 +67,11 @@ export const profileReducer = (state:InitialStateType = initialState , action: A
                 ...state,
                 newPostText : action.newText
             };
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile : action.profile
+            };
         default:
             return state
     }
@@ -76,5 +86,11 @@ export const updateNewPostTextActionCreator= (newText:string) => {
     return {
         type:UPDATE_NEW_POST_TEXT,
         newText:newText
+    } as const
+}
+export const setUserProfile = (profile: any) => {
+    return {
+        type: SET_USER_PROFILE,
+        profile:profile
     } as const
 }

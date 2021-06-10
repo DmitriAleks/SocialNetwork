@@ -5,6 +5,7 @@ import ProfileInfo from "./ProfileInfo/Profileinfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
+
 const Profile = () => {
     return (
         <div>
