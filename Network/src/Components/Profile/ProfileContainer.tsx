@@ -1,11 +1,10 @@
 import React from 'react';
-import s from './Profile.module.css';
-import ProfileInfo from "./ProfileInfo/Profileinfo";
-import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import {setUserProfile} from "../../redux/profile-reducer";
+import {ProfileUserType, setUserProfile} from "../../redux/profile-reducer";
+import {AppStateType} from "../../redux/redux-store";
+import {InitialStateUsersType, UsersType} from "../../redux/users-reducer";
 
 
 class ProfileContainer extends React.Component<any> {
@@ -24,7 +23,15 @@ class ProfileContainer extends React.Component<any> {
     }
 
 }
-let mapStateToProps = (state: any) => ({
+// export type UsersProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
+// type MapStateToPropsType = {
+//     profile: InitialStateUsersType
+// }
+// type MapDispatchToPropsType = {
+//     setUserProfile: (users: Array<ProfileUserType>) => void
+// }
+
+let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile
 })
 
