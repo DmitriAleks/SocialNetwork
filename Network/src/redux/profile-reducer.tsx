@@ -11,6 +11,29 @@ export type PostType = {
     likesCount: number,
     avatar: string
 }
+export type ProfileUserType = {
+    aboutMe: string,
+    contacts: {
+        facebook: string,
+        website: null,
+        vk: string,
+        twitter: string,
+        instagram: string,
+        youtube: null,
+        github: string,
+        mainLink: null
+    },
+    lookingForAJob: true,
+    lookingForAJobDescription:string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: string,
+        large: string
+    }
+
+}
+
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET-USER-PROFILE'
