@@ -7,7 +7,7 @@ import {AppStateType} from "../../redux/redux-store";
 import {InitialStateUsersType, UsersType} from "../../redux/users-reducer";
 
 
-class ProfileContainer extends React.Component<any> {
+class ProfileContainer extends React.Component<UsersProfilePropsType> {
 
     componentDidMount() {
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`)
@@ -23,13 +23,13 @@ class ProfileContainer extends React.Component<any> {
     }
 
 }
-// export type UsersProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
-// type MapStateToPropsType = {
-//     profile: InitialStateUsersType
-// }
-// type MapDispatchToPropsType = {
-//     setUserProfile: (users: Array<ProfileUserType>) => void
-// }
+export type UsersProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
+type MapStateToPropsType = {
+    profile: ProfileUserType
+}
+type MapDispatchToPropsType = {
+    setUserProfile: (users: Array<ProfileUserType>) => void
+}
 
 let mapStateToProps = (state: AppStateType) => ({
     profile: state.profilePage.profile
