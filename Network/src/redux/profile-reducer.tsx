@@ -67,7 +67,28 @@ let initialState = {
         },
     ] as Array<PostType>,
     newPostText: '',
-    profile: null
+    profile: {
+        aboutMe: 'string',
+        contacts: {
+            facebook: 'string',
+            website: null,
+            vk: 'string',
+            twitter: 'string',
+            instagram: 'string',
+            youtube: null,
+            github: 'string',
+            mainLink: null
+        },
+        lookingForAJob: true,
+        lookingForAJobDescription:'string',
+        fullName: 'string',
+        userId: 1,
+        photos: {
+            small: 'string',
+            large: 'string'
+        }
+
+    } as ProfileUserType
 }
 export type InitialStateType = typeof initialState
 
@@ -111,7 +132,7 @@ export const updateNewPostTextActionCreator= (newText:string) => {
         newText:newText
     } as const
 }
-export const setUserProfile = (profile: any) => {
+export const setUserProfile = (profile: ProfileUserType) => {
     return {
         type: SET_USER_PROFILE,
         profile:profile
