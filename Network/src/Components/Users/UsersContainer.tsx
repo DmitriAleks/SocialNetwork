@@ -8,11 +8,9 @@ import {
     UsersType,
     setCurrentPage, setTotalUserCount, setToggleIsFetching
 } from "../../redux/users-reducer";
-import {Dispatch} from "redux";
 import {AppStateType} from '../../redux/redux-store';
 import axios from "axios";
 import Users from "./Users";
-import loader from '../../assets/images/loading-.gif'
 import Preloader from "../common/Preloader/Preloader";
 
 class UsersContainer extends React.Component<UsersPropsType> {

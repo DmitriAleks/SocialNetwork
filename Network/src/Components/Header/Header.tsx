@@ -8,12 +8,11 @@ type HeaderType = {
 
 
 
-const Header = (props: any) => {
-
+const Header = (props: HeaderType) => {
     return ( <header className={s.header}>
             <div>
                 <img src="https://cs6.pikabu.ru/post_img/2017/09/08/6/150486171013913777.gif"/>
-                {props.isAuth ? 'плохо работает': <NavLink to={'/login'}>Login</NavLink>}
+                {props.isAuth ? props.login: <NavLink to={'/login'}>Login</NavLink>}
 
             </div>
         </header>

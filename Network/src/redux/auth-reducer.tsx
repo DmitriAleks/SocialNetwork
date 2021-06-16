@@ -6,17 +6,11 @@ const SET_USER_DATA = 'SET_USER_DATA'
 const UNFOLLOW = 'UNFOLLOW'
 
 let initialStateUser: InitialStateUserType = {
-    id: null,
-    email: null,
-    login: null,
-    isAuth: false,
-
-
-}
+} as InitialStateUserType
 export type InitialStateUserType = {
     id: number | null,
-    email: string | null,
-    login: string | null,
+    email: string ,
+    login: string ,
     isAuth: boolean
 }
 
@@ -24,6 +18,7 @@ export type InitialStateUserType = {
 export const authReducer = (state: InitialStateUserType = initialStateUser, action: UsersFollowType): InitialStateUserType => {
     switch (action.type) {
         case SET_USER_DATA:
+            debugger
             return {
                 ...state,
                 ...action.data,
@@ -34,10 +29,10 @@ export const authReducer = (state: InitialStateUserType = initialStateUser, acti
     }
 
 }
-export const setAuthUserData = (userId: number, email: string, login: string) => {
+export const setAuthUserData = (id: number, email: string, login: string) => {
     return {
         type: SET_USER_DATA,
-        data: {userId, email, login}
+        data: {id, email, login}
     } as const
 }
 export const unfollow = (userId: number) => {
