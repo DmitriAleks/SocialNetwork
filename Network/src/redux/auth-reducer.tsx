@@ -1,5 +1,5 @@
 export type UsersFollowType = setUserDataType | unfollowTypeAT
-export type setUserDataType = ReturnType<typeof setUserData>
+export type setUserDataType = ReturnType<typeof setAuthUserData>
 export type unfollowTypeAT = ReturnType<typeof unfollow>
 
 
@@ -31,7 +31,7 @@ export const authReducer = (state: InitialStateUsersType = initialStateUser, act
     }
 
 }
-export const setUserData = (userId: number, email:string, login:string) => {
+export const setAuthUserData = (userId: number, email:string, login:string) => {
     return {
         type: SET_USER_DATA,
         data: {userId,email,login}
@@ -43,4 +43,5 @@ export const unfollow = (userId: number) => {
         userId: userId
     } as const
 }
+
 
