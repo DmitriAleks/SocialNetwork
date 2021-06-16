@@ -12,7 +12,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
     if (!props.profile) {
         return <Preloader/>
     }
-
+    console.log(props.profile)
     return (
         <div>
           <div>
@@ -21,7 +21,8 @@ const ProfileInfo = (props: ProfileInfoType) => {
           </div>
             {props.profile.aboutMe}
             <div className={s.descriptionBlock}>
-                <img src={props.profile.photos.large} />
+                {props.profile.photos && props.profile.photos.large && <img  src={props.profile.photos.large} />}
+
             </div>
             <div>{props.profile.fullName}</div>
 

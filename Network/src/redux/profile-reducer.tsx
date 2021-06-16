@@ -28,8 +28,8 @@ export type ProfileUserType = {
     fullName: string,
     userId: number,
     photos: {
-        small: string,
-        large: string
+        small: string | null
+        large: string | null
     }
 
 }
@@ -67,7 +67,9 @@ let initialState = {
         },
     ] as Array<PostType>,
     newPostText: '',
-    profile: {} as ProfileUserType
+    profile: {
+
+    } as ProfileUserType
 }
 export type InitialStateType = typeof initialState
 
@@ -117,3 +119,4 @@ export const setUserProfile = (profile: ProfileUserType) => {
         profile:profile
     } as const
 }
+
