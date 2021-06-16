@@ -10,15 +10,15 @@ type MapStateToPropsType = {
     profile: ProfileUserType
 }
 type MapDispatchToPropsType = {
-    setUserProfile: (users: Array<ProfileUserType>) => void
+    setUserProfile: (profile: ProfileUserType) => void
 }
 type PathParamsType = {
     userId: string;
 }
-type PropsType = RouteComponentProps<PathParamsType> & UsersProfilePropsType
+export type PropsType = RouteComponentProps<PathParamsType> & UsersProfilePropsType
 export type UsersProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
 
-class ProfileContainer extends React.Component<any> {
+class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         debugger

@@ -67,28 +67,7 @@ let initialState = {
         },
     ] as Array<PostType>,
     newPostText: '',
-    profile: {
-        aboutMe: 'string',
-        contacts: {
-            facebook: 'string',
-            website: null,
-            vk: 'string',
-            twitter: 'string',
-            instagram: 'string',
-            youtube: null,
-            github: 'string',
-            mainLink: null
-        },
-        lookingForAJob: true,
-        lookingForAJobDescription:'string',
-        fullName: 'string',
-        userId: 1,
-        photos: {
-            small: 'string',
-            large: 'string'
-        }
-
-    } as ProfileUserType
+    profile: {} as ProfileUserType
 }
 export type InitialStateType = typeof initialState
 
