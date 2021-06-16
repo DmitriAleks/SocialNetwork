@@ -1,19 +1,19 @@
-export type UsersFollowType = setUserDataType | unfollowTypeAT
+export type UsersFollowType = setUserDataType
 export type setUserDataType = ReturnType<typeof setAuthUserData>
-export type unfollowTypeAT = ReturnType<typeof unfollow>
 
 
 const SET_USER_DATA = 'SET_USER_DATA'
 const UNFOLLOW = 'UNFOLLOW'
 
-let initialStateUser: InitialStateUsersType = {
+let initialStateUser: InitialStateUserType = {
     id: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+
 
 }
-export type InitialStateUsersType = {
+export type InitialStateUserType = {
     id: number | null,
     email: string | null,
     login: string | null,
@@ -21,7 +21,7 @@ export type InitialStateUsersType = {
 }
 
 
-export const authReducer = (state: InitialStateUsersType = initialStateUser, action: UsersFollowType): InitialStateUsersType => {
+export const authReducer = (state: InitialStateUserType = initialStateUser, action: UsersFollowType): InitialStateUserType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {
