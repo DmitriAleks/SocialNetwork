@@ -3,7 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import {UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {followUsers, unfollowUsers} from "../../api/api";
 
 type UsersPresentType = {
     totalUsersCount: number,
@@ -46,13 +46,7 @@ let Users = (props: UsersPresentType) => {
                         <div>
                             {u.followed
                                 ? <button onClick={() => {
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                        {withCredentials: true,
-                                            headers:{
-                                                'API-KEY': 'f98497de-3aa4-4fb0-ba69-3087854eec9e'
-                                            }
-                                        })
-                                        .then(response => {
+                                    unfollowUsers(u.id).then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.follow(u.id);
                                             }
@@ -61,13 +55,7 @@ let Users = (props: UsersPresentType) => {
                                 }}>Unfollow</button>
 
                                 : <button onClick={() => {
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
-                                        {}, {withCredentials: true,
-                                            headers:{
-                                                'API-KEY': 'f98497de-3aa4-4fb0-ba69-3087854eec9e'
-                                            }
-                                        })
-                                        .then(response => {
+                                    followUsers(u.id).then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.unfollow(u.id);
                                             }
