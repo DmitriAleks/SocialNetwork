@@ -1,10 +1,12 @@
-export type UsersFollowType = followType | unfollowTypeAT | setUsersTypeAT | setCurrentPageAT | setTotalUserCountAT|setToggleIsFetchingAT
-export type followType = ReturnType<typeof follow>
-export type unfollowTypeAT = ReturnType<typeof unfollow>
-export type setUsersTypeAT = ReturnType<typeof setUsers>
-export type setCurrentPageAT = ReturnType<typeof setCurrentPage>
-export type setTotalUserCountAT = ReturnType<typeof setTotalUserCount>
-export type setToggleIsFetchingAT = ReturnType<typeof setToggleIsFetching>
+export type UsersFollowType = followType | unfollowTypeAT | setUsersTypeAT | setCurrentPageAT | setTotalUserCountAT|setToggleIsFetchingAT|setToggleFollowingProgressAT;
+export type followType = ReturnType<typeof follow>;
+export type unfollowTypeAT = ReturnType<typeof unfollow>;
+export type setUsersTypeAT = ReturnType<typeof setUsers>;
+export type setCurrentPageAT = ReturnType<typeof setCurrentPage>;
+export type setTotalUserCountAT = ReturnType<typeof setTotalUserCount>;
+export type setToggleIsFetchingAT = ReturnType<typeof setToggleIsFetching>;
+export type setToggleFollowingProgressAT = ReturnType<typeof setToggleFollowingProgress>;
+
 
 
 
@@ -21,19 +23,21 @@ export type UsersType = {
 
 
 }
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET-USERS'
-const SET_CURRENT_PAGE = "SET_CURRENT_PAGE"
-const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT"
-const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING"
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
+const SET_USERS = 'SET-USERS';
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_USERS_COUNT = "SET-TOTAL-USERS-COUNT";
+const TOGGLE_IS_FETCHING = "TOGGLE-IS-FETCHING";
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
 let initialStateUsers: InitialStateUsersType = {
     users: [],
     pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching:false
+    isFetching:false,
+    followingInProgress: false
 
 }
 export type InitialStateUsersType = {
@@ -42,6 +46,7 @@ export type InitialStateUsersType = {
     totalUsersCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress: boolean
 }
 
 
@@ -87,6 +92,11 @@ export const usersReducer = (state: InitialStateUsersType = initialStateUsers, a
                 ...state,
                 isFetching: action.isFetching
             }
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.isFetching
+            }
         default:
             return state
     }
@@ -125,6 +135,12 @@ export const setTotalUserCount = (totalCount: number) => {
 export const setToggleIsFetching = (getFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
+        isFetching: getFetching
+    } as const
+}
+export const setToggleFollowingProgress = (getFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FOLLOWING_PROGRESS,
         isFetching: getFetching
     } as const
 }
