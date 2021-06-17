@@ -6,7 +6,7 @@ import {
     unfollow,
     InitialStateUsersType,
     UsersType,
-    setCurrentPage, setTotalUserCount, setToggleIsFetching, setToggleFollowingProgress
+    setCurrentPage, setTotalUserCount, setToggleIsFetching, setToggleFollowingProgress, followingInProgressType
 } from "../../redux/users-reducer";
 import {AppStateType} from '../../redux/redux-store';
 import Users from "./Users";
@@ -64,8 +64,8 @@ type MapDispatchToPropsType = {
     setCurrentPage: (pageNumber: number) => void
     setTotalUserCount: (totalCount: number) => void
     setToggleIsFetching:(getFetching:boolean)=> void
-    setToggleFollowingProgress:(a: boolean)=> void
-    followingInProgress: boolean
+    setToggleFollowingProgress:(isFollow: boolean, id:number)=> void
+    followingInProgress: Array<number>
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
