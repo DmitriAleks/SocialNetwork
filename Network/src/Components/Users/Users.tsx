@@ -69,7 +69,7 @@ let Users = (props: UsersPresentType) => {
                                         })
                                         .then(response => {
                                             if (response.data.resultCode === 0) {
-                                                props.follow(u.id);
+                                                props.unfollow(u.id);
                                             }
                                         });
 
