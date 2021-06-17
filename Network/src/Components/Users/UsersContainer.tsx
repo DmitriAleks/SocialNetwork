@@ -17,7 +17,7 @@ import {getUsers} from "../../api/api";
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
         this.props.setToggleIsFetching(true);
-        getUsers().then(response => {
+        getUsers(this.props.usersPage.currentPage, this.props.usersPage.pageSize).then(response => {
                 this.props.setToggleIsFetching(false)
                 this.props.setUsers(response.data.items)
                 this.props.setTotalUserCount(response.data.totalCount)
@@ -28,11 +28,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
     onPageChanged = (pageNumber: number) => {
         this.props.setToggleIsFetching(true)
         this.props.setCurrentPage(pageNumber)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.usersPage.pageSize}`,
-            {
-                withCredentials: true
-            })
-            .then(response => {
+        getUsers(pageNumber, this.props.usersPage.pageSize).then(response => {
                 this.props.setToggleIsFetching(false)
                 this.props.setUsers(response.data.items)
             });
