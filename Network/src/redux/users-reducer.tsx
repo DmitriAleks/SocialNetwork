@@ -1,3 +1,5 @@
+import {getUsers} from "../api/api";
+
 export type UsersFollowType = followType | unfollowTypeAT | setUsersTypeAT | setCurrentPageAT | setTotalUserCountAT|setToggleIsFetchingAT|setToggleFollowingProgressAT;
 export type followType = ReturnType<typeof follow>;
 export type unfollowTypeAT = ReturnType<typeof unfollow>;
@@ -152,4 +154,15 @@ export const setToggleFollowingProgress = (isFollow: boolean,userId:number) => {
         userId:userId
     } as const
 }
+ export const  getUsersThunkCreator = (currentPage,pageSize) => {
+   return  (dispath) => {
+         dispath(setToggleIsFetching(true));
+         getUsers(currentPage,pageSize).then(data => {
+
+             dispath(setToggleIsFetching(false))
+             dispath(setUsers(data.items))
+             dispath(setTotalUserCount(data.totalCount))
+         });
+     }
+ }
 
