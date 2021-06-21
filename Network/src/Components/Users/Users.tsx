@@ -14,7 +14,6 @@ type UsersPresentType = {
     follow: (userId: number) => void,
     unfollow: (userId: number) => void,
     onPageChanged: (pageNumber: number) => void,
-    setToggleFollowingProgress:(isFollow:boolean, id: number)=> void,
 }
 
 let Users = (props: UsersPresentType) => {
@@ -48,25 +47,11 @@ let Users = (props: UsersPresentType) => {
                         <div>
                             {u.followed
                                 ? <button disabled={props.followingInProgress.some(id=>id === u.id)} onClick={() => {
-                                    props.setToggleFollowingProgress(true, u.id)
-                                    usersAPI.unfollowUsers(u.id).then(response => {
-                                            if (response.data.resultCode === 0) {
-                                                props.follow(u.id);
-                                            }
-                                        props.setToggleFollowingProgress(false, u.id)
-                                        });
-
+                                    props.unfollow(u.id)
                                 }}>Unfollow</button>
 
                                 : <button  disabled={props.followingInProgress.some(id=>id === u.id)} onClick={() => {
-                                    props.setToggleFollowingProgress(true, u.id)
-                                    usersAPI.followUsers(u.id).then(response => {
-                                            if (response.data.resultCode === 0) {
-                                                props.unfollow(u.id);
-                                            }
-                                        props.setToggleFollowingProgress(false, u.id)
-                                        });
-
+                                    props.follow(u.id)
                                 }}>Follow</button> }
                         </div>
 
