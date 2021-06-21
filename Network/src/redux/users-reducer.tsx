@@ -1,4 +1,4 @@
-import {getUsers} from "../api/api";
+import { usersAPI} from "../api/api";
 
 export type UsersFollowType = followType | unfollowTypeAT | setUsersTypeAT | setCurrentPageAT | setTotalUserCountAT|setToggleIsFetchingAT|setToggleFollowingProgressAT;
 export type followType = ReturnType<typeof follow>;
@@ -157,7 +157,7 @@ export const setToggleFollowingProgress = (isFollow: boolean,userId:number) => {
  export const  getUsersThunkCreator = (currentPage: any,pageSize: any) => {
    return  (dispatch: any) => {
        dispatch(setToggleIsFetching(true));
-         getUsers(currentPage,pageSize).then(data => {
+         usersAPI.getUsers(currentPage,pageSize).then(data => {
 
              dispatch(setToggleIsFetching(false))
              dispatch(setUsers(data.items))

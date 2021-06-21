@@ -11,7 +11,6 @@ import {
 import {AppStateType} from '../../redux/redux-store';
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import {getUsers} from "../../api/api";
 
 class UsersContainer extends React.Component<UsersPropsType> {
     componentDidMount() {

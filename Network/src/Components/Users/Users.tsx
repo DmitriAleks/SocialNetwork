@@ -3,7 +3,7 @@ import s from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import {followingInProgressType, UsersType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
-import {followUsers, unfollowUsers} from "../../api/api";
+import { usersAPI} from "../../api/api";
 
 type UsersPresentType = {
     totalUsersCount: number,
@@ -49,7 +49,7 @@ let Users = (props: UsersPresentType) => {
                             {u.followed
                                 ? <button disabled={props.followingInProgress.some(id=>id === u.id)} onClick={() => {
                                     props.setToggleFollowingProgress(true, u.id)
-                                    unfollowUsers(u.id).then(response => {
+                                    usersAPI.unfollowUsers(u.id).then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.follow(u.id);
                                             }
@@ -60,7 +60,7 @@ let Users = (props: UsersPresentType) => {
 
                                 : <button  disabled={props.followingInProgress.some(id=>id === u.id)} onClick={() => {
                                     props.setToggleFollowingProgress(true, u.id)
-                                    followUsers(u.id).then(response => {
+                                    usersAPI.followUsers(u.id).then(response => {
                                             if (response.data.resultCode === 0) {
                                                 props.unfollow(u.id);
                                             }
