@@ -1,7 +1,6 @@
-import { ThunkAction, ThunkDispatch } from "redux-thunk";
+import {ThunkDispatch} from "redux-thunk";
 import {usersAPI} from "../api/api";
-import {AnyAction} from "redux";
-import {AppActionsType, AppStateType} from "./redux-store";
+import {AppActionsType} from "./redux-store";
 
 export type UsersActionsType =
     followType
@@ -26,12 +25,10 @@ export type UsersType = {
     uniqueUrlName: null,
     photos: {
         small: string,
-        large: string
+        large: string,
     },
     status: null,
-    followed: boolean
-
-
+    followed: boolean,
 }
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -52,7 +49,6 @@ let initialStateUsers: InitialStateUsersType = {
     currentPage: 1,
     isFetching: false,
     followingInProgress: []
-
 }
 export type InitialStateUsersType = {
     users: Array<UsersType>
@@ -167,7 +163,6 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
     return (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
         dispatch(setToggleIsFetching(true));
         usersAPI.getUsers(currentPage, pageSize).then(data => {
-
             dispatch(setToggleIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setTotalUserCount(data.totalCount))
