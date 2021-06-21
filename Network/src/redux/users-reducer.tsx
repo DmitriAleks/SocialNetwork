@@ -154,14 +154,14 @@ export const setToggleFollowingProgress = (isFollow: boolean,userId:number) => {
         userId:userId
     } as const
 }
- export const  getUsersThunkCreator = (currentPage,pageSize) => {
-   return  (dispath) => {
-         dispath(setToggleIsFetching(true));
+ export const  getUsersThunkCreator = (currentPage: any,pageSize: any) => {
+   return  (dispatch: any) => {
+       dispatch(setToggleIsFetching(true));
          getUsers(currentPage,pageSize).then(data => {
 
-             dispath(setToggleIsFetching(false))
-             dispath(setUsers(data.items))
-             dispath(setTotalUserCount(data.totalCount))
+             dispatch(setToggleIsFetching(false))
+             dispatch(setUsers(data.items))
+             dispatch(setTotalUserCount(data.totalCount))
          });
      }
  }
