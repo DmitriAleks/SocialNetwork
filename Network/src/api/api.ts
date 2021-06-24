@@ -19,8 +19,6 @@ export const usersAPI = {
     },
     followUsers(id: number) {
         return instance.post(`follow/${id}`)
-    }, authAxios() {
-        return instance.get(`auth/me`,)
     },
     getProfile(userId:string) {
         return  instance.get(`profile/` + userId);
