@@ -1,4 +1,6 @@
 import {usersAPI} from "../api/api";
+import {ThunkDispatch} from "redux-thunk";
+import {AppActionsType} from "./redux-store";
 
 export type ActionsTypes = AddPostActionType | UpdateNewPostTextType | setUserProfile
 
@@ -115,12 +117,12 @@ export const updateNewPostTextActionCreator= (newText:string) => {
     } as const
 }
 export const setUserProfile = (profile: ProfileUserType) => {
-    return {
+    return  {
         type: SET_USER_PROFILE,
         profile:profile
     } as const
 }
-export const getUserProfile = (userId: string) => (dispatch:any)=>{
+export const getUserProfile = (userId: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>)=>{
     usersAPI.getProfile(userId)
         .then(response => {
             dispatch(setUserProfile(response.data));

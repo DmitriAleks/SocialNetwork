@@ -46,7 +46,7 @@ type MapDispatchToPropsType = {
     unfollow: (userId: number) => void
     setCurrentPage: (pageNumber: number) => void
     followingInProgress: Array<number>
-    getUsersThunkCreator: any
+    getUsersThunkCreator: (currentPage: number, pageSize: number) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 

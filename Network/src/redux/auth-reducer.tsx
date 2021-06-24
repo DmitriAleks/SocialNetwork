@@ -1,3 +1,5 @@
+import {authAPI} from "../api/api";
+
 export type UsersFollowType = setUserDataType
 export type setUserDataType = ReturnType<typeof setAuthUserData>
 
@@ -34,11 +36,19 @@ export const setAuthUserData = (id: number, email: string, login: string) => {
         data: {id, email, login}
     } as const
 }
-export const unfollow = (userId: number) => {
-    return {
-        type: UNFOLLOW,
-        userId: userId
-    } as const
+// export const unfollow = (userId: number) => {
+//     return {
+//         type: UNFOLLOW,
+//         userId: userId
+//     } as const
+// }
+export const getAuthUserData=()=>(dispatch:any)=>{
+    authAPI.me().then(response => {
+        if(response.data.resultCode === 0) {
+            let {id, email, login} = response.data.data
+            dispatch(setAuthUserData(id, email, login));
+        }
+    });
 }
 
 

@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import {profileReducer} from "./profile-reducer";
+import {ActionsTypes, profileReducer} from "./profile-reducer";
 import {dialogsReducer} from "./dialogs-reducer";
 import {UsersActionsType, usersReducer} from "./users-reducer";
 import {authReducer} from "./auth-reducer";
@@ -17,6 +17,6 @@ export type AppStateType = ReturnType<typeof reducers>
    let store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 
-export type AppActionsType = UsersActionsType //| asdActioi
+export type AppActionsType = UsersActionsType|ActionsTypes //| asdActioi
 
 export default store
