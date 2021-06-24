@@ -1,11 +1,12 @@
 import {authAPI} from "../api/api";
+import {ThunkDispatch} from "redux-thunk";
+import {AppActionsType} from "./redux-store";
 
 export type UsersFollowType = setUserDataType
 export type setUserDataType = ReturnType<typeof setAuthUserData>
 
 
 const SET_USER_DATA = 'SET_USER_DATA'
-const UNFOLLOW = 'UNFOLLOW'
 
 let initialStateUser: InitialStateUserType = {
 } as InitialStateUserType
@@ -36,13 +37,7 @@ export const setAuthUserData = (id: number, email: string, login: string) => {
         data: {id, email, login}
     } as const
 }
-// export const unfollow = (userId: number) => {
-//     return {
-//         type: UNFOLLOW,
-//         userId: userId
-//     } as const
-// }
-export const getAuthUserData=()=>(dispatch:any)=>{
+export const getAuthUserData=()=>(dispatch: ThunkDispatch<{}, {}, AppActionsType>)=>{
     authAPI.me().then(response => {
         if(response.data.resultCode === 0) {
             let {id, email, login} = response.data.data
