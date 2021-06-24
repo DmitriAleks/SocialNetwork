@@ -171,7 +171,6 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
 }
 export const follow = (userId: number) => {
     return (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
-        console.log('follow ====>')
         dispatch(setToggleFollowingProgress(false, userId))
         usersAPI.followUsers(userId)
             .then(response => {
@@ -185,7 +184,6 @@ export const follow = (userId: number) => {
 }
 export const unfollow = (userId: number) => {
     return (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
-        console.log('unfollow ====>')
         dispatch(setToggleFollowingProgress(true, userId))
         usersAPI.unfollowUsers(userId)
             .then(response => {
@@ -193,7 +191,6 @@ export const unfollow = (userId: number) => {
                 if (response.data.resultCode === 0) {
                     dispatch(unfollowSuccess(userId))
                 }
-
             })
             .finally(() => dispatch(setToggleFollowingProgress(false, userId)))
     }
