@@ -22,7 +22,7 @@ const Dialogs = (props: DialogsPropsType) => {
         props.updateNewMessageBody(body)
     }
 
-if (props.isAuth=== false) return <Redirect to={'/login'}/>;
+if (!props.isAuth) return <Redirect to={'/login'} />;//требует стартовый стейт, иначе undefined
 
     return (
         <div>
