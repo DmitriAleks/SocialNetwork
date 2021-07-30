@@ -6,15 +6,15 @@ import {authReducer, UsersFollowType} from "./auth-reducer";
 import thunkMiddleware  from 'redux-thunk'
 
 
-let reducers = combineReducers({
+let reducer = combineReducers({
     profilePage : profileReducer,
     dialogPage : dialogsReducer,
     usersPage: usersReducer,
     auth: authReducer
 })
-export type AppStateType = ReturnType<typeof reducers>
+export type AppStateType = ReturnType<typeof reducer>
 
-   let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+   let store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 
 export type AppActionsType = UsersActionsType|ActionsTypes|UsersFollowType //| asdActioi
