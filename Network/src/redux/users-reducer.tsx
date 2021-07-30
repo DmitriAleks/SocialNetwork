@@ -61,7 +61,6 @@ export type InitialStateUsersType = {
 
 
 export const usersReducer = (state: InitialStateUsersType = initialStateUsers, action: AppActionsType): InitialStateUsersType => {
-    console.log(action)
     switch (action.type) {
         case FOLLOW:
             return {
@@ -158,7 +157,7 @@ export const setToggleFollowingProgress = (isFollow: boolean, userId: number) =>
         userId: userId
     } as const
 }
-
+//THUNK
 export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
     return (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
         dispatch(setToggleIsFetching(true));
@@ -174,7 +173,6 @@ export const follow = (userId: number) => {
         dispatch(setToggleFollowingProgress(false, userId))
         usersAPI.followUsers(userId)
             .then(response => {
-                console.log(response.data.resultCode)
                 if (response.data.resultCode === 0) {
                     dispatch(followSuccess(userId))
                 }
@@ -187,7 +185,6 @@ export const unfollow = (userId: number) => {
         dispatch(setToggleFollowingProgress(true, userId))
         usersAPI.unfollowUsers(userId)
             .then(response => {
-                console.log(response.data)
                 if (response.data.resultCode === 0) {
                     dispatch(unfollowSuccess(userId))
                 }
