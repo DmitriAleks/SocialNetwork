@@ -1,17 +1,33 @@
 import React from 'react'
 
-const ProfileStatus = () => {
 
-
-    return (
-        <>
-            <div>
-                <span>{'props.status'}</span>
-            </div>
-            <div>
-                <input value={'props.status'}/>
-            </div>
-        </>
-    )
+type ProfileStatusType = {
+    status: string
 }
+
+class ProfileStatus extends React.Component<ProfileStatusType, any> {
+    state = {
+        editMode: false
+    }
+
+    
+    render() {
+        const {status} = this.props
+        return (
+            <>
+                {!this.state.editMode &&
+                <div>
+                    <span>{status}</span>
+                </div>}
+                {this.state.editMode &&
+                <div>
+                    <input value={status}/>
+                </div>}
+
+            </>
+        )
+    }
+
+}
+
 export default ProfileStatus
