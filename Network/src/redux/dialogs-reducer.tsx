@@ -65,3 +65,11 @@ export const updateNewMessageBodyCreator= (body:string) => {
         body: body
     } as const
 }
+const thunkCreator = () => {
+    return (dispatch, getState) => {
+        api.deleteTodolist(todolistId)
+            .then(res => {
+                dispatch(actionCreator(todolistId))
+            })
+    }
+};
