@@ -30,7 +30,6 @@ class ProfileContainer extends React.Component<PropsType> {
 
     }
     render() {
-        debugger
         return (
 
             <Profile profile={this.props.profile} status={this.props.status} updateStatusProfile={this.props.updateStatusProfile}/>
