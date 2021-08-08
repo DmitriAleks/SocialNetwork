@@ -1,11 +1,13 @@
 import React from "react";
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
-import {ProfileUserType} from "../../../redux/profile-reducer";
+import {ProfileUserType, updateStatusProfile} from "../../../redux/profile-reducer";
 import ProfileStatus from './ProfileStatus'
 
 type ProfileInfoType = {
     profile: ProfileUserType
+    status:string
+    updateStatusProfile:(status: string) => void
 }
 
 
@@ -26,7 +28,7 @@ const ProfileInfo = (props: ProfileInfoType) => {
 
             </div>
             <div>{props.profile.fullName}</div>
-                         <ProfileStatus status={'hello my  friends'}/>
+                         <ProfileStatus status={props.status} updateStatusProfile={props.updateStatusProfile} />
         </div>
     )
 }

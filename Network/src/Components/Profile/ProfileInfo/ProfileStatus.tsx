@@ -1,36 +1,43 @@
-import React from 'react'
+import React, {ChangeEvent } from 'react'
+import {updateStatusProfile} from "../../../redux/profile-reducer";
 
 
 type ProfileStatusType = {
     status: string
+    updateStatusProfile:(status: string) => void
 }
 
 class ProfileStatus extends React.Component<ProfileStatusType, any> {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
     activateEditMode =()=>  {
-        console.log(this)
         this.setState({
-            editMode : true
+            editMode : true,
         })
     }
     deActivateEditMode =()=>  {
         this.setState({
             editMode : false
         })
+        this.props.updateStatusProfile(this.state.status);
+    }
+    onStatusChange= (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status:  e.currentTarget.value
+        })
     }
     render() {
-        const {status} = this.props
         return (
             <>
                 {!this.state.editMode &&
                 <div>
-                    <span onDoubleClick={this.activateEditMode}>{status}</span>
+                    <span onDoubleClick={this.activateEditMode}>{this.state.status}</span>
                 </div>}
                 {this.state.editMode &&
                 <div>
-                    <input value={status} onBlur={this.deActivateEditMode} autoFocus={true}/>
+                    <input onChange={this.onStatusChange} value={this.state.status} onBlur={this.deActivateEditMode} autoFocus={true}/>
                 </div>}
 
             </>
