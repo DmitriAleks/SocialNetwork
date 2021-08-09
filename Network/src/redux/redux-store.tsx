@@ -4,13 +4,14 @@ import {dialogsReducer} from "./dialogs-reducer";
 import {UsersActionsType, usersReducer} from "./users-reducer";
 import {authReducer, UsersFollowType} from "./auth-reducer";
 import thunkMiddleware  from 'redux-thunk'
-
+import { reducer as formReducer } from 'redux-form'
 
 let reducer = combineReducers({
     profilePage : profileReducer,
     dialogPage : dialogsReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form:formReducer,
 })
 export type AppStateType = ReturnType<typeof reducer>
 
@@ -18,5 +19,6 @@ export type AppStateType = ReturnType<typeof reducer>
 
 
 export type AppActionsType = UsersActionsType|ActionsTypes|UsersFollowType //| asdActioi
-
+//@ts-ignore
+window.store = store
 export default store
