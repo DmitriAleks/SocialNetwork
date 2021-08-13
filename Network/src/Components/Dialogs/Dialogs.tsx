@@ -4,6 +4,7 @@ import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
 import { Redirect } from "react-router-dom";
+import {Field, InjectedFormProps, reduxForm } from 'redux-form';
 
 
 
@@ -32,17 +33,31 @@ if (!props.isAuth) return <Redirect to={'/login'} />;//требует старт
                 </div>
                 <div className={s.messages}>
                     <div>{messagesElements}</div>
-                    <div>
-                        <div><textarea value={newMessageBody} onChange={onNewMessageChange}
-                                       placeholder='Enter your message'></textarea></div>
-                        <div>
-                            <button onClick={onSendMessageClick}>Send</button>
-                        </div>
-                    </div>
                 </div>
             </div>
+            <AddMessageFormRedux/>
         </div>
     )
 
 }
+type FormDataType = {
+    textarea:string,
+}
+const AddMessageForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
+    return(
+        <form onSubmit={props.handleSubmit}>
+        <div>
+            <Field commponent={'textarea'} name={'newMessageBody'} placeholder='Enter your message'/>
+            {/*<textarea value={newMessageBody} onChange={onNewMessageChange}*/}
+            {/*           placeholder='Enter your message'></textarea>*/}
+        </div>
+        <div>
+            <button>Send</button>
+        </div>
+    </form>
+    )
+
+}
+const AddMessageFormRedux = reduxForm<FormDataType>({form: 'dialogAddMessageForm'})(AddMessageForm)
+
 export default Dialogs;

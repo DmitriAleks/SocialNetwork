@@ -23,7 +23,6 @@ const MyPosts = (props: MyPostPropsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-
                     <textarea onChange={onPostChange} value={props.profilePage.newPostText}/>
                 </div>
                 <div>
