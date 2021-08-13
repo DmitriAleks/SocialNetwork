@@ -2,10 +2,9 @@ import {profileAPI, usersAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType} from "./redux-store";
 
-export type ActionsTypes = AddPostActionType | UpdateNewPostTextType | setUserProfileType | setStatusProfileType
+export type ActionsTypes = AddPostActionType |  setUserProfileType | setStatusProfileType
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
-export type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCreator>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setStatusProfileType = ReturnType<typeof setStatusProfileActionCreator>
 export type PostType = {
@@ -83,7 +82,7 @@ export const profileReducer = (state:InitialStateType = initialState , action: A
         case ADD_POST:
             let newPost: PostType = {
                 id: new Date().getTime(),
-                message: state.newPostText,
+                message: action.newPost,
                 likesCount: 1,
                 avatar: "https://images.boosty.to/user/822986/avatar?change_time=1593874069&croped=1&mh=150&mw=150"
             }
@@ -91,11 +90,6 @@ export const profileReducer = (state:InitialStateType = initialState , action: A
                 ...state,
                 posts : [...state.posts, newPost],
             }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText : action.newText
-            };
         case SET_USER_PROFILE:
             return {
                 ...state,
@@ -111,15 +105,10 @@ export const profileReducer = (state:InitialStateType = initialState , action: A
     }
 
 }
-export const addPostActionCreator = () => {
+export const addPostActionCreator = (newPost:string) => {
     return {
-        type: ADD_POST
-    } as const
-}
-export const updateNewPostTextActionCreator= (newText:string) => {
-    return {
-        type:UPDATE_NEW_POST_TEXT,
-        newText:newText
+        type: ADD_POST,
+        newPost
     } as const
 }
 export const setStatusProfileActionCreator= (status:string) => {

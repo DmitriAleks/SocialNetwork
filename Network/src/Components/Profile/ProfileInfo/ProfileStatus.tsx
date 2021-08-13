@@ -1,5 +1,4 @@
 import React, {ChangeEvent } from 'react'
-import {updateStatusProfile} from "../../../redux/profile-reducer";
 
 
 type ProfileStatusType = {
