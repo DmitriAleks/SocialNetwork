@@ -8,3 +8,8 @@
 .loginBlock {
     float: right
 }
+.div {
+    border-color: antiquewhite ;
+    height: 800px;
+    width: 800px;
+}
