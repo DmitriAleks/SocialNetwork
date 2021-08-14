@@ -9,7 +9,7 @@ type MapDispatchToPropsType = {
 }
 type MapStateToPropsType = {
     isAuth: boolean
-    login: string
+    login: string| null
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
 
