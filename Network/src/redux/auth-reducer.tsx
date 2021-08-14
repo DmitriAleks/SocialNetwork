@@ -1,6 +1,7 @@
 import {authAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 export type UsersFollowType = setUserDataType
 export type setUserDataType = ReturnType<typeof setAuthUserData>
@@ -44,9 +45,15 @@ export const getAuthUserData = () => (dispatch: ThunkDispatch<{}, {}, AppActions
     });
 }
 export const login = (email: string, password: string, rememberMe: boolean) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
+
+
     authAPI.login(email, password, rememberMe).then(response => {
         if (response.data.resultCode === 0) {
             dispatch(getAuthUserData())
+        } else {
+            let message = response.data.messages.length > 0 ? response.data.messages[0]: 'Some error';
+            let action:any = stopSubmit('login',{_error:message});
+            dispatch(action)
         }
     });
 }
