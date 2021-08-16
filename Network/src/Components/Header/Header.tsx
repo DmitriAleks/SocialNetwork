@@ -15,7 +15,7 @@ const Header = (props: HeaderType) => {
             <div>
                 <img src="https://cs6.pikabu.ru/post_img/2017/09/08/6/150486171013913777.gif"/>
                 {props.isAuth
-                    ? <button onClick={props.logout}>{props.login} Покинуть профиль</button>
+                    ? <button onClick={props.logout}>{props.login} Покинуть профиль</button> //не работаю div
                     : <NavLink to={'/login'}>Login</NavLink>}
 
             </div>
