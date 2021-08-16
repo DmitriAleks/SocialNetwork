@@ -11,7 +11,6 @@ import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
 import {connect} from "react-redux";
-import {getAuthUserData} from "./redux/auth-reducer";
 import {initializedApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
 import Preloader from "./Components/common/Preloader/Preloader";

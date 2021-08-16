@@ -1,9 +1,7 @@
-import {authAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType} from "./redux-store";
-import {stopSubmit} from "redux-form";
 import {getAuthUserData} from "./auth-reducer";
-import {Dispatch} from "redux";
+
 
 export type AllAppActionsType = setUserDataType
 export type setUserDataType = ReturnType<typeof initializedSuccess>
