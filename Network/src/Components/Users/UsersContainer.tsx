@@ -47,7 +47,7 @@ class UsersContainer extends React.Component<UsersPropsType> {
 
 
 type MapStateToPropsType = {
-     usersPage: InitialStateUsersType
+    usersPage: InitialStateUsersType
     //usersPage: (state :AppStateType)=> {}
 }
 type MapDispatchToPropsType = {
@@ -58,17 +58,6 @@ type MapDispatchToPropsType = {
     getUsersThunkCreator: (currentPage: number, pageSize: number) => void
 }
 export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
-
-// let mapStateToProps = (state: AppStateType) => {
-//     return {
-//         usersPage: state.usersPage,
-//         pageSize: state.usersPage.pageSize,
-//         totalUsersCount: state.usersPage.totalUsersCount,
-//         currentPage: state.usersPage.currentPage,
-//         isFetching: state.usersPage.isFetching,
-//         followingInProgress: state.usersPage.followingInProgress,
-//     }
-// }
 
 let mapStateToProps = (state: AppStateType) => {
     return {

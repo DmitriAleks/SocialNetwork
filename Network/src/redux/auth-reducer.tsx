@@ -12,8 +12,8 @@ const SET_USER_DATA = 'SET_USER_DATA'
 let initialStateUser: InitialStateUserType = {} as InitialStateUserType
 export type InitialStateUserType = {
     id: number | null,
-    email: string| null,
-    login: string| null,
+    email: string | null,
+    login: string | null,
     isAuth: boolean
 }
 
@@ -30,17 +30,17 @@ export const authReducer = (state: InitialStateUserType = initialStateUser, acti
     }
 
 }
-export const setAuthUserData = (id: number| null, email: string| null, login: string| null, isAuth:boolean) => {
+export const setAuthUserData = (id: number | null, email: string | null, login: string | null, isAuth: boolean) => {
     return {
         type: SET_USER_DATA,
-        payload: {id, email, login,isAuth}
+        payload: {id, email, login, isAuth}
     } as const
 }
 export const getAuthUserData = () => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
     return authAPI.me().then(response => {
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data
-            dispatch(setAuthUserData(id, email, login,true));
+            dispatch(setAuthUserData(id, email, login, true));
         }
     });
 }
@@ -49,8 +49,8 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
         if (response.data.resultCode === 0) {
             dispatch(getAuthUserData())
         } else {
-            let message = response.data.messages.length > 0 ? response.data.messages[0]: 'Some error';
-            let action:any = stopSubmit('login',{_error:message});     //any
+            let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error';
+            let action: any = stopSubmit('login', {_error: message});     //any
             dispatch(action)
         }
     });
@@ -58,7 +58,7 @@ export const login = (email: string, password: string, rememberMe: boolean) => (
 export const logout = () => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
     authAPI.logout().then(response => {
         if (response.data.resultCode === 0) {
-            dispatch(setAuthUserData(null, null, null,false));
+            dispatch(setAuthUserData(null, null, null, false));
         }
     });
 }

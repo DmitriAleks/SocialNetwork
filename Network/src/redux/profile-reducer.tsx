@@ -2,7 +2,7 @@ import {profileAPI, usersAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType} from "./redux-store";
 
-export type ActionsTypes = AddPostActionType |  setUserProfileType | setStatusProfileType
+export type ActionsTypes = AddPostActionType | setUserProfileType | setStatusProfileType
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
@@ -26,7 +26,7 @@ export type ProfileUserType = {
         mainLink: null
     },
     lookingForAJob: true,
-    lookingForAJobDescription:string,
+    lookingForAJobDescription: string,
     fullName: string,
     userId: number,
     photos: {
@@ -69,15 +69,13 @@ let initialState = {
         },
     ] as Array<PostType>,
     newPostText: '',
-    profile: {
-
-    } as ProfileUserType,
+    profile: {} as ProfileUserType,
     status: ''
 }
 export type InitialStateType = typeof initialState
 
 
-export const profileReducer = (state:InitialStateType = initialState , action: ActionsTypes):InitialStateType => {
+export const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost: PostType = {
@@ -86,59 +84,59 @@ export const profileReducer = (state:InitialStateType = initialState , action: A
                 likesCount: 1,
                 avatar: "https://images.boosty.to/user/822986/avatar?change_time=1593874069&croped=1&mh=150&mw=150"
             }
-             return {
+            return {
                 ...state,
-                posts : [...state.posts, newPost],
+                posts: [...state.posts, newPost],
             }
         case SET_USER_PROFILE:
             return {
                 ...state,
-                profile : action.profile
+                profile: action.profile
             };
         case SET_STATUS_PROFILE:
             return {
                 ...state,
-                status : action.status
+                status: action.status
             };
         default:
             return state
     }
 
 }
-export const addPostActionCreator = (newPost:string) => {
+export const addPostActionCreator = (newPost: string) => {
     return {
         type: ADD_POST,
         newPost
     } as const
 }
-export const setStatusProfileActionCreator= (status:string) => {
+export const setStatusProfileActionCreator = (status: string) => {
     return {
-        type:SET_STATUS_PROFILE,
+        type: SET_STATUS_PROFILE,
         status,
     } as const
 }
 export const setUserProfile = (profile: ProfileUserType) => {
-    return  {
+    return {
         type: SET_USER_PROFILE,
-        profile:profile
+        profile: profile
     } as const
 }
-export const getUserProfile = (userId: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>)=>{
+export const getUserProfile = (userId: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
     usersAPI.getProfile(userId)
         .then(response => {
             dispatch(setUserProfile(response.data));
         });
 }
-export const getStatusProfile = (userId: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>)=>{
+export const getStatusProfile = (userId: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
     profileAPI.getStatus(userId)
         .then(response => {
             dispatch(setStatusProfileActionCreator(response.data));
         });
 }
-export const updateStatusProfile = (status : string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>)=>{
+export const updateStatusProfile = (status: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
     profileAPI.updateStatus(status)
         .then(response => {
-            if(response.data.resultCode === 0){
+            if (response.data.resultCode === 0) {
                 dispatch(setStatusProfileActionCreator(response.data));
             }
         });
