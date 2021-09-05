@@ -1,22 +1,23 @@
 import { createSelector } from "reselect";
 import {AppStateType} from "./redux-store";
 
-export const getUsers = (state: AppStateType) => {
-    return state.usersPage;
-}
-export const getUsersTwo = (state: AppStateType) => {
+
+export const getUsersTwo = (state: AppStateType) => {//примитивный селектор
     return state.usersPage.users;
 }
-export const getUserSelector = (state: AppStateType) => {
-    return state.usersPage.users.filter(u=> true)
+export const getUserSelectorTwo = (state: AppStateType) => {
+    getUsersTwo(state).filter(u=> true)
 }
-
-
-export const getUsersSuperSelector = createSelector(()=>{
-    state.usersPage.users.filter(u=> true)
+export const getUsersSuperSelectorTwo = createSelector(getUsersTwo, (users)=>{// сложный селектор, использует
+    //примитивный getUsersTwo для получения необходимых данных (users), при изменение значения в users функцию возврщает нам
+    // новое значение
+ return   users.filter(u=> true);
 })
 
 
+export const getUsers = (state: AppStateType) => {
+    return state.usersPage;
+}
 export const getPageSize = (state: AppStateType) => {
     return state.usersPage.pageSize;
 }
