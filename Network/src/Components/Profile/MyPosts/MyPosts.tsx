@@ -8,26 +8,6 @@ import { Textarea } from '../../common/FormControls/FormsControls';
 
 
 let maxLength10= maxLengthCreator(10)
-
-const MyPosts = (props: MyPostPropsType) => {
-    let postElements = props.profilePage.posts.map(post => <Post id={post.id} message={post.message}
-                                                                 likesCount={post.likesCount} avatar={post.avatar}/>)
-
-
-    const addPost = (values:FormDataType) => {
-        console.log(values);
-        props.addPost(values.newPostText);
-    }
-    return (
-        <div className={s.postsBlock}>
-            <h3>My posts</h3>
-            <MyPostsRedux onSubmit={addPost}/>
-            <div className={s.post}>
-                {postElements}
-            </div>
-        </div>
-    )
-}
 type FormDataType ={
     newPostText:string
 }
@@ -46,4 +26,31 @@ const AddNewPostForm:React.FC<InjectedFormProps<FormDataType>> = (props) => {
 }
 const MyPostsRedux = reduxForm<FormDataType>({form:'myPosts'})(AddNewPostForm)
 
-export default MyPosts;
+
+
+
+
+ const MyPosts = React.memo((props: MyPostPropsType) => {
+    // shouldComponentUpdate(nextProps: Readonly<MyPostPropsType>, nextState: Readonly<{}>, nextContext: any): boolean {
+    //     return nextProps != this.props  || nextState !=this.state
+    // }//функция которая сравнивает приходящие пропсы, при возвращение фолс не перерисовывает компонету, для классовых компонет
+    let postElements = props.profilePage.posts.map(post => <Post id={post.id} message={post.message}
+                                                                 likesCount={post.likesCount} avatar={post.avatar}/>)
+
+
+    const addPost = (values:FormDataType) => {
+        console.log(values);
+        props.addPost(values.newPostText);
+    }
+    return (
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
+            <MyPostsRedux onSubmit={addPost}/>
+            <div className={s.post}>
+                {postElements}
+            </div>
+        </div>
+    )
+})
+
+export default MyPosts
