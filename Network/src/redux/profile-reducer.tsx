@@ -2,7 +2,11 @@ import {profileAPI, usersAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType} from "./redux-store";
 
-export type ActionsTypes = AddPostActionType | setUserProfileType | setStatusProfileType
+export type ActionsTypes =
+    | AddPostActionType
+    | setUserProfileType
+    | setStatusProfileType
+    | ReturnType<typeof deletePost>
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
@@ -98,6 +102,10 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 ...state,
                 status: action.status
             };
+        case "DELETE-POST":
+            return{
+                ...state, posts: state.posts.filter(p=> p.id != action.postId)
+            }
         default:
             return state
     }
@@ -119,6 +127,12 @@ export const setUserProfile = (profile: ProfileUserType) => {
     return {
         type: SET_USER_PROFILE,
         profile: profile
+    } as const
+}
+export const deletePost = (postId: number) => {
+    return {
+        type: 'DELETE-POST',
+        postId
     } as const
 }
 export const getUserProfile = (userId: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
