@@ -1,5 +1,6 @@
 import {ThunkDispatch} from "redux-thunk";
 import {usersAPI} from "../api/api";
+import { updatesObjectInArray } from "../utils/object-helpers/object-helpers";
 import {AppActionsType} from "./redux-store";
 
 export type UsersActionsType =
@@ -59,22 +60,12 @@ export const usersReducer = (state: InitialStateUsersType = initialStateUsers, a
         case 'USERS/FOLLOW':
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: true}
-                    }
-                    return u;
-                })
+               users: updatesObjectInArray(state.users,action.userId,  {followed: true} )
             }
         case 'USERS/UNFOLLOW':
             return {
                 ...state,
-                users: state.users.map(u => {
-                    if (u.id === action.userId) {
-                        return {...u, followed: false}
-                    }
-                    return u;
-                })
+                users: updatesObjectInArray(state.users,action.userId,  {followed: false} )
             }
         case 'USERS/SET-USERS':
             return {

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./Components/Navbar/Navbar";
-import {BrowserRouter, Route, withRouter} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
@@ -15,14 +15,14 @@ import {initializedApp} from "./redux/app-reducer";
 import {AppStateType} from "./redux/redux-store";
 import Preloader from "./Components/common/Preloader/Preloader";
 
-type AppMapStateAndDispatchPropsType = mapStateToPropsType&MapDispatchToPropsType
+type AppMapStateAndDispatchPropsType = mapStateToPropsType & MapDispatchToPropsType
 type mapStateToPropsType = {
     initialized: boolean,
 }
 type MapDispatchToPropsType = {
     initializedApp: () => void,
 }
-let mapStateToProps = (state: AppStateType):mapStateToPropsType=>({
+let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     initialized: state.app.initialized
 })
 
@@ -32,27 +32,24 @@ class App extends React.Component<AppMapStateAndDispatchPropsType> {
     }
 
     render() {
-        if(!this.props.initialized) {
+        if (!this.props.initialized) {
             return <Preloader/>
         }
-
         return (
-            <BrowserRouter>
-                <div className='app-wrapper'>
-                    <HeaderContainer/>
-                    <Navbar/>
-                    <div className='app-wrapper-content'>
-                        <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                        <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
-                        <Route path='/users' render={() => <UsersContainer/>}/>
-                        <Route path='/news' render={() => <News/>}/>
-                        <Route path='/music' render={() => <Music/>}/>
-                        <Route path='/settings' render={() => <Settings/>}/>
-                        <Route path='/login' render={() => <Login/>}/>
-                    </div>
-
+            <div className='app-wrapper'>
+                <HeaderContainer/>
+                <Navbar/>
+                <div className='app-wrapper-content'>
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Route path='/news' render={() => <News/>}/>
+                    <Route path='/music' render={() => <Music/>}/>
+                    <Route path='/settings' render={() => <Settings/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
                 </div>
-            </BrowserRouter>
+
+            </div>
         );
     }
 }
@@ -60,5 +57,4 @@ class App extends React.Component<AppMapStateAndDispatchPropsType> {
 // export default compose<React.ComponentType>(
 //     withRouter,
 //     connect(null, {getAuthUserData})(App));
-export default
-    connect(mapStateToProps, {initializedApp})(App);
+export default connect(mapStateToProps, {initializedApp})(App);
