@@ -40,11 +40,6 @@ export type ProfileUserType = {
 
 }
 
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const ADD_POST = 'ADD-POST'
-const SET_USER_PROFILE = 'SET-USER-PROFILE'
-const SET_STATUS_PROFILE = 'SET-STATUS-PROFILE'
-
 let initialState = {
     posts: [
         {
@@ -81,7 +76,7 @@ export type InitialStateType = typeof initialState
 
 export const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case ADD_POST:
+        case 'PROFILE/ADD-POST':
             let newPost: PostType = {
                 id: new Date().getTime(),
                 message: action.newPost,
@@ -92,17 +87,17 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 ...state,
                 posts: [...state.posts, newPost],
             }
-        case SET_USER_PROFILE:
+        case 'PROFILE/SET-USER-PROFILE':
             return {
                 ...state,
                 profile: action.profile
             };
-        case SET_STATUS_PROFILE:
+        case 'PROFILE/SET-STATUS-PROFILE':
             return {
                 ...state,
                 status: action.status
             };
-        case "DELETE-POST":
+        case 'PROFILE/DELETE-POST':
             return{
                 ...state, posts: state.posts.filter(p=> p.id != action.postId)
             }
@@ -113,45 +108,40 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
 }
 export const addPostActionCreator = (newPost: string) => {
     return {
-        type: ADD_POST,
+        type: 'PROFILE/ADD-POST',
         newPost
     } as const
 }
 export const setStatusProfileActionCreator = (status: string) => {
     return {
-        type: SET_STATUS_PROFILE,
+        type: 'PROFILE/SET-STATUS-PROFILE',
         status,
     } as const
 }
 export const setUserProfile = (profile: ProfileUserType) => {
     return {
-        type: SET_USER_PROFILE,
+        type: 'PROFILE/SET-USER-PROFILE',
         profile: profile
     } as const
 }
 export const deletePost = (postId: number) => {
     return {
-        type: 'DELETE-POST',
+        type: 'PROFILE/DELETE-POST',
         postId
     } as const
 }
-export const getUserProfile = (userId: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
-    usersAPI.getProfile(userId)
-        .then(response => {
+export const getUserProfile = (userId: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
+   let response = await usersAPI.getProfile(userId)
             dispatch(setUserProfile(response.data));
-        });
 }
-export const getStatusProfile = (userId: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
-    profileAPI.getStatus(userId)
-        .then(response => {
+export const getStatusProfile = (userId: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
+    let response = await profileAPI.getStatus(userId)
             dispatch(setStatusProfileActionCreator(response.data));
-        });
 }
-export const updateStatusProfile = (status: string) => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
-    profileAPI.updateStatus(status)
-        .then(response => {
+export const updateStatusProfile = (status: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
+    let response = await profileAPI.updateStatus(status)
             if (response.data.resultCode === 0) {
                 dispatch(setStatusProfileActionCreator(response.data));
             }
-        });
+
 }

@@ -36,7 +36,7 @@ export const profileAPI = {
         return  instance.put(`profile/status`, {status});
     }
 }
-export const authAPI= {
+export const authAPI = {
     me() {
         return instance.get(`auth/me`,)
     },

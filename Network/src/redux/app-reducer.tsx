@@ -7,8 +7,6 @@ export type AllAppActionsType = setUserDataType
 export type setUserDataType = ReturnType<typeof initializedSuccess>
 
 
-const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS'
-
 let initialStateUser: InitialStateUserType = {} as InitialStateUserType
 export type InitialStateUserType = {
     initialized: boolean,
@@ -17,7 +15,7 @@ export type InitialStateUserType = {
 
 export const appReducer = (state: InitialStateUserType = initialStateUser, action: AllAppActionsType): InitialStateUserType => {
     switch (action.type) {
-        case INITIALIZED_SUCCESS:
+        case 'APP/INITIALIZED_SUCCESS':
             return {
                 ...state,
                 initialized: true
@@ -25,19 +23,19 @@ export const appReducer = (state: InitialStateUserType = initialStateUser, actio
         default:
             return state
     }
-
 }
+
 export const initializedSuccess = () => {
     return {
-        type: INITIALIZED_SUCCESS,
+        type: 'APP/INITIALIZED_SUCCESS',
     } as const
 }
 export const initializedApp = () => (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
     let promise = dispatch(getAuthUserData());
-    promise.then(() => {
-            dispatch(initializedSuccess());
-        }
-    )
-
+    Promise.all([promise])
+        .then(() => {
+                dispatch(initializedSuccess());
+            }
+        )
 }
 
