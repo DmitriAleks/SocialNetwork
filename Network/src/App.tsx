@@ -5,15 +5,18 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
-import DialogsContainer from "./Components/Dialogs/DialogsContainer";
 import UsersContainer from "./Components/Users/UsersContainer";
-import ProfileContainer from "./Components/Profile/ProfileContainer";
 import HeaderContainer from "./Components/Header/HeaderContainer";
 import Login from "./Components/Login/Login";
 import {connect, Provider} from "react-redux";
 import {initializedApp} from "./redux/app-reducer";
 import store, {AppStateType} from "./redux/redux-store";
 import Preloader from "./Components/common/Preloader/Preloader";
+
+// import ProfileContainer from "./Components/Profile/ProfileContainer";
+// import DialogsContainer from "./Components/Dialogs/DialogsContainer";
+const DialogsContainer = React.lazy(() => import('./Components/Dialogs/DialogsContainer'));
+const ProfileContainer = React.lazy(() => import('./Components/Profile/ProfileContainer'));
 
 type AppMapStateAndDispatchPropsType = mapStateToPropsType & MapDispatchToPropsType
 type mapStateToPropsType = {
@@ -40,8 +43,16 @@ class App extends React.Component<AppMapStateAndDispatchPropsType> {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
-                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
+                    <Route path='/dialogs' render={() => {
+                        return <React.Suspense fallback={<Preloader/>}>
+                            <DialogsContainer/>
+                        </React.Suspense>
+                    }}/>
+                    <Route path='/profile/:userId?' render={() => {
+                        return <React.Suspense fallback={<Preloader/>}>
+                            <ProfileContainer/>
+                        </React.Suspense>
+                    }}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                     <Route path='/news' render={() => <News/>}/>
                     <Route path='/music' render={() => <Music/>}/>
@@ -60,7 +71,7 @@ class App extends React.Component<AppMapStateAndDispatchPropsType> {
 let AppContainer = connect(mapStateToProps, {initializedApp})(App);
 
 export const SamuraiJSApp = () => {
-    return  <BrowserRouter>
+    return <BrowserRouter>
         <Provider store={store}>
             <AppContainer/>
         </Provider>
