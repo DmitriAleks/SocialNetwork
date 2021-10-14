@@ -16,6 +16,7 @@ type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     getStatusProfile: (userId: string) => void
     updateStatusProfile: (status: string) => void
+    updatePhoto: () => void
 }
 type PathParamsType = {
     userId: any; ////////
@@ -25,7 +26,7 @@ export type UsersProfilePropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class ProfileContainer extends React.Component<PropsType> {
 
-    componentDidMount() {
+    refreshProfile() {
         let userId = this.props.match.params.userId;
         // if(!userId) {
         //     this.props.history.push('/login');
@@ -36,14 +37,27 @@ class ProfileContainer extends React.Component<PropsType> {
         // }
         this.props.getUserProfile(userId);
         this.props.getStatusProfile(userId);
+    }
 
+
+    componentDidMount() {
+      this.refreshProfile();
+    }
+    componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
+        if(this.props.match.params.userId != prevProps.match.params.userId ) {
+            this.refreshProfile();
+        }
     }
 
     render() {
         return (
 
-            <Profile profile={this.props.profile} status={this.props.status}
-                     updateStatusProfile={this.props.updateStatusProfile}/>
+            <Profile isOwner={!this.props.match.params.userId}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatusProfile={this.props.updateStatusProfile}
+                     updatePhoto={this.props.updatePhoto}
+            />
         )
     }
 
@@ -60,7 +74,7 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile, getStatusProfile, updateStatusProfile}),
+    connect(mapStateToProps, {getUserProfile, getStatusProfile, updateStatusProfile ,updatePhoto}),
     withRouter,
     // withAuthRedirect,
 )(ProfileContainer)
