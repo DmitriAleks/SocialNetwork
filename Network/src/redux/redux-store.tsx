@@ -16,8 +16,13 @@ let reducer = combineReducers({
     form: formReducer,
 })
 export type AppStateType = ReturnType<typeof reducer>
-
-let store = createStore(reducer, applyMiddleware(thunkMiddleware));
+//@ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//@ts-ignore
+const store = createStore(reducer, /* preloadedState, */ composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+));
+// let store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 
 export type AppActionsType = UsersActionsType | ActionsTypes | UsersFollowType | AllAppActionsType //| asdActioi

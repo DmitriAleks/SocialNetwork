@@ -17,14 +17,14 @@ type UsersPresentType = {
 let Users: React.FC<UsersPresentType> = ({currentPage, totalUsersCount, pageSize, onPageChanged, ...props}) => {
     return <div>
         <Paginator currentPage={currentPage} onPageChanged={onPageChanged} pageSize={pageSize}
-                   totalUsersCount={totalUsersCount}/>
+                   totalItemCount={totalUsersCount}/>
         {
             props.users.map(u => <User key={u.id} user={u} followingInProgress={props.followingInProgress}
                                        follow={props.follow}
                                        unfollow={props.unfollow}/>)
         }
         <Paginator currentPage={currentPage} onPageChanged={onPageChanged} pageSize={pageSize}
-                   totalUsersCount={totalUsersCount}/>
+                   totalItemCount={totalUsersCount}/>
     </div>
 }
 export default Users
