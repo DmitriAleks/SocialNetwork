@@ -5,6 +5,8 @@ import {ProfileContactUserType, ProfileUserType} from "../../../redux/profile-re
 import userPhoto from '../../../assets/images/user.png';
 
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileDataForm from "./ProfileDataForm";
+
 
 type ProfileInfoType = {
     profile: ProfileUserType
@@ -22,7 +24,9 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatusPr
             updatePhoto(e.target.files[0])
         }
     }
-
+    const onSubmit = (formData: any) => {
+        console.log(formData)
+    }
     console.log(profile.contacts)
     if (!profile) {
         return <Preloader/>
@@ -36,8 +40,8 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatusPr
                     ? <img src={profile.photos.large}/>
                     : <img src={userPhoto}/>}
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-                {editMode ? <ProfileDataForm/>
-                    : <ProfileData profile={profile}/>
+                {editMode ? <ProfileDataForm onSubmit={onSubmit} />
+                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={()=>{setEditMode(true)}}/>
                 }
 
             </div>
@@ -56,12 +60,13 @@ const Contact: React.FC<ContactType> = ({contactTitle, contactValue}) => {
 type ProFileDataType = {
     profile: ProfileUserType,
     isOwner: boolean,
+    goToEditMode: () => void
 }
-const ProfileData: React.FC<ProFileDataType> = ({profile, isOwner}) => {
+const ProfileData: React.FC<ProFileDataType> = ({profile, isOwner, goToEditMode}) => {
     return (
         <div>
             {isOwner && <div>
-                <button>edit</button>
+                <button onClick={goToEditMode}>edit</button>
             </div>}
             <div>
                 <b>Full name </b>: {profile.fullName}
@@ -90,34 +95,5 @@ const ProfileData: React.FC<ProFileDataType> = ({profile, isOwner}) => {
     )
 
 }
-const ProfileDataForm: React.FC<ProFileDataType> = ({profile}) => {
-    return (
-        <div>
-            <div>
-                <b>Full name </b>: {profile.fullName}
-            </div>
-            <div>
-                <b>Looking for a job </b>: {profile.lookingForAJob ? 'yes' : 'no'}
-            </div>
-            {profile.lookingForAJob &&
-            <div>
-                <b>My professional skills </b>: {profile.lookingForAJobDescription}
-            </div>
-            }
-            <div>
-                <b>About me </b>: {profile.aboutMe}
-            </div>
-            <div>
-                {profile.contacts &&
-                <div>
-                    <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
-                    return <Contact key={key} contactTitle={key} contactValue={key}/>
-                })}
-                </div>
-                }
-            </div>
-        </div>
-    )
 
-}
 export default ProfileInfo;
