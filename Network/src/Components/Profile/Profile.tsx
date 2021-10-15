@@ -9,12 +9,13 @@ type ProfileType = {
     status:string
     updateStatusProfile:(status: string) => void
     isOwner:boolean
+    updatePhoto: (e:any) => void
 }
 
 const Profile = (props: ProfileType) => {
     return (
         <div>
-            <ProfileInfo isOwner={props.isOwner} profile={props.profile} status={props.status}  updateStatusProfile={props.updateStatusProfile}/>
+            <ProfileInfo isOwner={props.isOwner} updatePhoto={props.updatePhoto} profile={props.profile} status={props.status}  updateStatusProfile={props.updateStatusProfile}/>
             <MyPostsContainer />
         </div>
     )

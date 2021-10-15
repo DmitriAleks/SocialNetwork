@@ -11,7 +11,7 @@ type ProfileInfoType = {
     status: string
     updateStatusProfile: (status: string) => void
     isOwner: boolean
-    updatePhoto: () => void
+    updatePhoto: (e:any) => void
 }
 
 
@@ -22,7 +22,6 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatusPr
             updatePhoto(e.target.files[0])
         }
     }
-
 
 
     if (!profile) {
@@ -36,11 +35,37 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatusPr
                     ? <img src={profile.photos.large}/>
                     : <img src={userPhoto}/>}
                 {isOwner && <input type={'file'}  onChange={onMainPhotoSelected}/>}
+                <div>
+                    <div>
+                        <b>Full name </b>: {profile.fullName}
+                    </div>
+                    <div>
+                        <b>Looking for a job </b>: {profile.lookingForAJob ? 'yes': 'no'}
+                    </div>
+                    {profile.lookingForAJob &&
+                    <div>
+                        <b>My professional skills </b>: {profile.lookingForAJobDescription}
+                    </div>
+                    }
+                    <div>
+                        <b>About me </b>: {profile.aboutMe}
+                    </div>
+                    <div>
+                        <b>Contacts</b>: {Object.keys(profile.contacts).map(key=>{
+                           return <div>asdasd</div>
+                    })}
+                    </div>
+                </div>
+
             </div>
             <div>{profile.fullName}</div>
             <ProfileStatusWithHooks status={status} updateStatusProfile={updateStatusProfile}/>
         </div>
     )
+}
+
+const Contact:React.FC<any> = ({contactTitle,contactValue }) => {
+    return <div><b>{contactTitle}</b>:{contactValue}</div>
 }
 
 export default ProfileInfo;

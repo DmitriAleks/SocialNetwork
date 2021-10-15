@@ -34,6 +34,15 @@ export const profileAPI = {
     },
     updateStatus(status: any) {
         return  instance.put(`profile/status`, {status});
+    },
+    updatePhoto(photo:any) {
+        const formData = new FormData();
+        formData.append('image', photo)
+        return  instance.put<GeneralType<SavePhotoResponseDataType>>(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
     }
 }
 export const authAPI = {
@@ -46,4 +55,19 @@ export const authAPI = {
     logout() {
         return instance.delete(`auth/login`)
     },
+}
+
+type GeneralType<D = {}> = {
+    data: D
+    messages: Array<string>
+    fieldsErrors?: Array<string>
+    resultCode: number
+}
+type SavePhotoResponseDataType = {
+    photos: PhotosProfileType
+}
+
+export type PhotosProfileType = {
+    small: string
+    large: string
 }

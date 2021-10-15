@@ -6,29 +6,33 @@ export type ActionsTypes =
     | AddPostActionType
     | setUserProfileType
     | setStatusProfileType
+    | updatePhotoProfile
     | ReturnType<typeof deletePost>
 
 export type AddPostActionType = ReturnType<typeof addPostActionCreator>
 export type setUserProfileType = ReturnType<typeof setUserProfile>
 export type setStatusProfileType = ReturnType<typeof setStatusProfileActionCreator>
+export type updatePhotoProfile = ReturnType<typeof updatePhoto>
 export type PostType = {
     id: number,
     message: string,
     likesCount: number,
     avatar: string
 }
+export type ProfileContactUserType = {
+    facebook: string,
+    website: null,
+    vk: string,
+    twitter: string,
+    instagram: string,
+    youtube: null,
+    github: string,
+    mainLink: null
+
+}
 export type ProfileUserType = {
     aboutMe: string,
-    contacts: {
-        facebook: string,
-        website: null,
-        vk: string,
-        twitter: string,
-        instagram: string,
-        youtube: null,
-        github: string,
-        mainLink: null
-    },
+    contacts: ProfileContactUserType,
     lookingForAJob: true,
     lookingForAJobDescription: string,
     fullName: string,
@@ -98,8 +102,12 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 status: action.status
             };
         case 'PROFILE/DELETE-POST':
-            return{
-                ...state, posts: state.posts.filter(p=> p.id != action.postId)
+            return {
+                ...state, posts: state.posts.filter(p => p.id != action.postId)
+            }
+        case 'PROFILE/UPDATE-PHOTO':
+            return {
+                ...state, profile: {...state.profile, photos: action.photo}
             }
         default:
             return state
@@ -130,18 +138,30 @@ export const deletePost = (postId: number) => {
         postId
     } as const
 }
+export const updatePhoto = (photo: any) => {
+    return {
+        type: 'PROFILE/UPDATE-PHOTO',
+        photo
+    } as const
+}
 export const getUserProfile = (userId: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
-   let response = await usersAPI.getProfile(userId)
-            dispatch(setUserProfile(response.data));
+    let response = await usersAPI.getProfile(userId)
+    dispatch(setUserProfile(response.data));
 }
 export const getStatusProfile = (userId: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
     let response = await profileAPI.getStatus(userId)
-            dispatch(setStatusProfileActionCreator(response.data));
+    dispatch(setStatusProfileActionCreator(response.data));
 }
 export const updateStatusProfile = (status: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
     let response = await profileAPI.updateStatus(status)
-            if (response.data.resultCode === 0) {
-                dispatch(setStatusProfileActionCreator(response.data));
-            }
-
+    if (response.data.resultCode === 0) {
+        dispatch(setStatusProfileActionCreator(response.data));
+    }
+}
+export const updatePhotoProfile = (file: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
+    debugger
+    let response = await profileAPI.updatePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(updatePhoto(response.data.data.photos));
+    }
 }
