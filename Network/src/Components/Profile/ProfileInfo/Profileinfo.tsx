@@ -32,8 +32,9 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
             updatePhoto(e.target.files[0])
         }
     }
-    const onSubmit = (formData: ProfileDataFormType) => {
-        saveProfile(formData)
+    const onSubmit = async (formData: ProfileDataFormType) => {
+       await saveProfile(formData)
+        setEditMode(false)
     }
     console.log(profile.contacts)
     if (!profile) {
@@ -47,7 +48,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
                     ? <img src={profile.photos.large}/>
                     : <img src={userPhoto}/>}
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-                {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit}/>
+                {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={profile} />
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
                         setEditMode(true)
                     }}/>
@@ -63,7 +64,7 @@ type ContactType = {
     contactTitle: string,
     contactValue: string
 }
-const Contact: React.FC<ContactType> = ({contactTitle, contactValue}) => {
+export const Contact: React.FC<ContactType> = ({contactTitle, contactValue}) => {
     return <div className={s.contact}><b>{contactTitle}</b>:{contactValue}</div>
 }
 type ProFileDataType = {

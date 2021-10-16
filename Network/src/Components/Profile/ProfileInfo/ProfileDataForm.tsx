@@ -1,6 +1,5 @@
 import React from "react";
 import {Input, Textarea} from "../../common/FormControls/FormsControls";
-import {required} from "../../../utils/validators/validators";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 export type ProfileDataFormType = {
@@ -35,15 +34,15 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormType>> = ({hand
                                          name={'aboutMe'}
                                          component={Textarea}/>
             </div>
-            <div>
-                {/*{profile.contacts &&*/}
-                {/*<div>*/}
-                {/*    <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {*/}
-                {/*    return <Contact key={key} contactTitle={key} contactValue={key}/>*/}
-                {/*})}*/}
-                {/*</div>*/}
-                {/*}*/}
-            </div>
+            {/*<div>*/}
+            {/*    {profile.contacts &&*/}
+            {/*    <div>*/}
+            {/*        <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {*/}
+            {/*        return <Contact key={key} contactTitle={key} contactValue={key}/>*/}
+            {/*    })}*/}
+            {/*    </div>*/}
+            {/*    }*/}
+            {/*</div>*/}
         </form>
     )
 

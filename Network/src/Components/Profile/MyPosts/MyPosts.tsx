@@ -34,7 +34,7 @@ const MyPostsRedux = reduxForm<FormDataType>({form:'myPosts'})(AddNewPostForm)
     // shouldComponentUpdate(nextProps: Readonly<MyPostPropsType>, nextState: Readonly<{}>, nextContext: any): boolean {
     //     return nextProps != this.props  || nextState !=this.state
     // }//функция которая сравнивает приходящие пропсы, при возвращение фолс не перерисовывает компонету, для классовых компонет
-    let postElements = props.profilePage.posts.map(post => <Post id={post.id} message={post.message}
+    let postElements = props.profilePage.posts.map(post => <Post key={post.id} id={post.id} message={post.message}
                                                                  likesCount={post.likesCount} avatar={post.avatar}/>)
 
 
