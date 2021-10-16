@@ -3,9 +3,9 @@ import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileContactUserType, ProfileUserType} from "../../../redux/profile-reducer";
 import userPhoto from '../../../assets/images/user.png';
-
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import ProfileDataForm from "./ProfileDataForm";
+import ProfileDataForm, { ProfileDataFormType } from "./ProfileDataForm";
+import ProfileDataFormReduxForm from "./ProfileDataForm";
 
 
 type ProfileInfoType = {
@@ -14,24 +14,24 @@ type ProfileInfoType = {
     updateStatusProfile: (status: string) => void
     isOwner: boolean
     updatePhoto: (e: any) => void
+    saveProfile: (profile:any) => void
 }
 
 
-const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatusProfile, isOwner, updatePhoto}) => {
+const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatusProfile, isOwner, updatePhoto,saveProfile}) => {
     const [editMode, setEditMode] = useState(false)
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
             updatePhoto(e.target.files[0])
         }
     }
-    const onSubmit = (formData: any) => {
-        console.log(formData)
+    const onSubmit = (formData: ProfileDataFormType) => {
+        saveProfile(formData)
     }
     console.log(profile.contacts)
     if (!profile) {
         return <Preloader/>
     }
-    debugger
     return (
         <div>
             {profile.aboutMe}
@@ -40,7 +40,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatusPr
                     ? <img src={profile.photos.large}/>
                     : <img src={userPhoto}/>}
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-                {editMode ? <ProfileDataForm onSubmit={onSubmit} />
+                {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit}  />
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={()=>{setEditMode(true)}}/>
                 }
 

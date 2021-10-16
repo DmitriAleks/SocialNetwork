@@ -20,37 +20,41 @@ export const usersAPI = {
     followUsers(id: number) {
         return instance.post(`follow/${id}`)
     },
-    getProfile(userId:string) {
+    getProfile(userId: string) {
         console.warn('Obsolete method. Please profileAPI object.')
-        return  profileAPI.getProfile(userId)
+        return profileAPI.getProfile(userId)
     }
 }
 export const profileAPI = {
-    getProfile(userId:string) {
-        return  instance.get(`profile/` + userId);
+    getProfile(userId: string) {
+        return instance.get(`profile/` + userId);
     },
-    getStatus(userId:string) {
-        return  instance.get(`profile/status/` + userId);
+    getStatus(userId: string) {
+        return instance.get(`profile/status/` + userId);
     },
     updateStatus(status: any) {
-        return  instance.put(`profile/status`, {status});
+        return instance.put(`profile/status`, {status});
     },
-    updatePhoto(photo:any) {
+    updatePhoto(photo: any) {
         const formData = new FormData();
         formData.append('image', photo)
-        return  instance.put<GeneralType<SavePhotoResponseDataType>>(`profile/photo`, formData, {
+        return instance.put<GeneralType<SavePhotoResponseDataType>>(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         });
+    },
+    saveProfile(profile: any) {
+        return instance.put<GeneralType<SavePhotoResponseDataType>>(`profile`, profile);
     }
 }
+
 export const authAPI = {
     me() {
         return instance.get(`auth/me`,)
     },
-    login(email:string,password:string,rememberMe:boolean = false) {
-        return instance.post(`auth/login`, {email,password,rememberMe})
+    login(email: string, password: string, rememberMe: boolean = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
     },
     logout() {
         return instance.delete(`auth/login`)

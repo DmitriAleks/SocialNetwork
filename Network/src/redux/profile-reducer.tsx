@@ -159,8 +159,13 @@ export const updateStatusProfile = (status: string) => async (dispatch: ThunkDis
     }
 }
 export const updatePhotoProfile = (file: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
-    debugger
     let response = await profileAPI.updatePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(updatePhoto(response.data.data.photos));
+    }
+}
+export const saveProfileTC = (profile: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
+    let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(updatePhoto(response.data.data.photos));
     }

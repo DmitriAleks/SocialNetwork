@@ -17,12 +17,12 @@ let reducer = combineReducers({
 })
 export type AppStateType = ReturnType<typeof reducer>
 //@ts-ignore
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 //@ts-ignore
-const store = createStore(reducer, /* preloadedState, */ composeEnhancers(
-    applyMiddleware(thunkMiddleware)
-));
-// let store = createStore(reducer, applyMiddleware(thunkMiddleware));
+// const store = createStore(reducer, /* preloadedState, */ composeEnhancers(
+//     applyMiddleware(thunkMiddleware)
+// ));
+const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
 
 export type AppActionsType = UsersActionsType | ActionsTypes | UsersFollowType | AllAppActionsType //| asdActioi
