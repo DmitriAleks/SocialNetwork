@@ -14,7 +14,7 @@ type FormDataType = {
     rememberMe: boolean,
 }
 let maxLength25 = maxLengthCreator(25)
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit,error}) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -27,7 +27,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit,erro
             <div>
                 <Field component={Input} name={'rememberMe'} type={'checkbox'}/>remember me
             </div>
-            { error && <div className={style.formSummaryError}>
+            {error && <div className={style.formSummaryError}>
                 {error}
             </div>
             }

@@ -1,4 +1,5 @@
 import axios from "axios";
+import {ProfileDataFormType} from "../Components/Profile/ProfileInfo/ProfileDataForm";
 
 const instance = axios.create({
     withCredentials: true,
@@ -44,7 +45,7 @@ export const profileAPI = {
             }
         });
     },
-    saveProfile(profile: any) {
+    saveProfile(profile: ProfileDataFormType) {
         return instance.put<GeneralType<SavePhotoResponseDataType>>(`profile`, profile);
     }
 }

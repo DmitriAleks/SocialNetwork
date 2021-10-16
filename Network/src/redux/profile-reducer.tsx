@@ -1,6 +1,7 @@
 import {profileAPI, usersAPI} from "../api/api";
 import {ThunkDispatch} from "redux-thunk";
 import {AppActionsType} from "./redux-store";
+import {ProfileDataFormType} from "../Components/Profile/ProfileInfo/ProfileDataForm";
 
 export type ActionsTypes =
     | AddPostActionType
@@ -164,7 +165,7 @@ export const updatePhotoProfile = (file: string) => async (dispatch: ThunkDispat
         dispatch(updatePhoto(response.data.data.photos));
     }
 }
-export const saveProfileTC = (profile: string) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
+export const saveProfileTC = (profile: ProfileDataFormType) => async (dispatch: ThunkDispatch<{}, {}, AppActionsType>) => {
     let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(updatePhoto(response.data.data.photos));

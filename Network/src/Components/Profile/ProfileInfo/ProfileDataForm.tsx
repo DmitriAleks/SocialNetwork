@@ -4,9 +4,9 @@ import {required} from "../../../utils/validators/validators";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
 export type ProfileDataFormType = {
-    fullName:string
-    lookingForAJob:boolean
-    lookingForAJobDescription:string
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
     aboutMe: string
 }
 
@@ -16,11 +16,11 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormType>> = ({hand
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <button >save
+                <button>save
                 </button>
             </div>
             <b>Full name</b>: <Field placeholder={'fullName'} name={'fullName'}
-                                              component={Input} />
+                                     component={Input}/>
             <div>
                 <b>Looking for a job </b>: <Field placeholder={'lookingForAJob'} name={'lookingForAJob'}
                                                   component={Input} type={'checkbox'}/>

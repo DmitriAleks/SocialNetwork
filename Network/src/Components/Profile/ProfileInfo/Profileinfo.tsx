@@ -4,7 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import {ProfileContactUserType, ProfileUserType} from "../../../redux/profile-reducer";
 import userPhoto from '../../../assets/images/user.png';
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import ProfileDataForm, { ProfileDataFormType } from "./ProfileDataForm";
+import ProfileDataForm, {ProfileDataFormType} from "./ProfileDataForm";
 import ProfileDataFormReduxForm from "./ProfileDataForm";
 
 
@@ -14,11 +14,18 @@ type ProfileInfoType = {
     updateStatusProfile: (status: string) => void
     isOwner: boolean
     updatePhoto: (e: any) => void
-    saveProfile: (profile:any) => void
+    saveProfile: (profile: ProfileDataFormType) => void
 }
 
 
-const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatusProfile, isOwner, updatePhoto,saveProfile}) => {
+const ProfileInfo: React.FC<ProfileInfoType> = ({
+                                                    profile,
+                                                    status,
+                                                    updateStatusProfile,
+                                                    isOwner,
+                                                    updatePhoto,
+                                                    saveProfile
+                                                }) => {
     const [editMode, setEditMode] = useState(false)
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
@@ -40,8 +47,10 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateStatusPr
                     ? <img src={profile.photos.large}/>
                     : <img src={userPhoto}/>}
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-                {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit}  />
-                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={()=>{setEditMode(true)}}/>
+                {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit}/>
+                    : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
+                        setEditMode(true)
+                    }}/>
                 }
 
             </div>
