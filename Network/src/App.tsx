@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./Components/Navbar/Navbar";
-import {BrowserRouter, Route} from 'react-router-dom';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
@@ -30,8 +30,23 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 })
 
 class App extends React.Component<AppMapStateAndDispatchPropsType> {
+    catchAllUnhandledErrors = (promiseRejectionEvent: any) => {
+        alert('Some error')
+        console.log(promiseRejectionEvent)
+    }
+
+
+
     componentDidMount() {
         this.props.initializedApp();
+        window.addEventListener("unhandledrejection", function (promiseRejectionEvent) {
+            // handle error here, for example log
+        });
+    }
+    componentWillUnmount() {
+        window.removeEventListener("unhandledrejection", function (promiseRejectionEvent) {
+            // handle error here, for example log
+        });
     }
 
     render() {
@@ -43,21 +58,25 @@ class App extends React.Component<AppMapStateAndDispatchPropsType> {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route path='/dialogs' render={() => {
-                        return <React.Suspense fallback={<Preloader/>}>
-                            <DialogsContainer/>
-                        </React.Suspense>
-                    }}/>
-                    <Route path='/profile/:userId?' render={() => {
-                        return <React.Suspense fallback={<Preloader/>}>
-                            <ProfileContainer/>
-                        </React.Suspense>
-                    }}/>
-                    <Route path='/users' render={() => <UsersContainer/>}/>
-                    <Route path='/news' render={() => <News/>}/>
-                    <Route path='/music' render={() => <Music/>}/>
-                    <Route path='/settings' render={() => <Settings/>}/>
-                    <Route path='/login' render={() => <Login/>}/>
+                    <Switch>
+                        <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+                        <Route path='/dialogs' render={() => {
+                            return <React.Suspense fallback={<Preloader/>}>
+                                <DialogsContainer/>
+                            </React.Suspense>
+                        }}/>
+                        <Route path='/profile/:userId?' render={() => {
+                            return <React.Suspense fallback={<Preloader/>}>
+                                <ProfileContainer/>
+                            </React.Suspense>
+                        }}/>
+                        <Route path='/users' render={() => <UsersContainer/>}/>
+                        <Route path='/news' render={() => <News/>}/>
+                        <Route path='/music' render={() => <Music/>}/>
+                        <Route path='/settings' render={() => <Settings/>}/>
+                        <Route path='/login' render={() => <Login/>}/>
+                        <Route path='*' render={() => <div>404</div>}/>
+                    </Switch>
                 </div>
 
             </div>
