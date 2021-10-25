@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Navbar from "./Components/Navbar/Navbar";
-import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
+import {BrowserRouter, HashRouter, Redirect, Route, Switch} from 'react-router-dom';
 import News from "./Components/News/News";
 import Music from "./Components/Music/Music";
 import Settings from "./Components/Settings/Settings";
@@ -87,13 +87,14 @@ class App extends React.Component<AppMapStateAndDispatchPropsType> {
 // export default compose<React.ComponentType>(
 //     withRouter,
 //     connect(null, {getAuthUserData})(App));
+// basename={process.env.PUBLIC_URL}
 let AppContainer = connect(mapStateToProps, {initializedApp})(App);
 
 export const SamuraiJSApp = () => {
-    return <BrowserRouter>
+    return <HashRouter  >
         <Provider store={store}>
             <AppContainer/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 }
 
