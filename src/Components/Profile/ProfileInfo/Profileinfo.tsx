@@ -33,7 +33,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
         }
     }
     const onSubmit = async (formData: ProfileDataFormType) => {
-       await saveProfile(formData)
+        await saveProfile(formData)
         setEditMode(false)
     }
     console.log(profile.contacts)
@@ -41,19 +41,19 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
         return <Preloader/>
     }
     return (
-        <div>
-            {profile.aboutMe}
-            <div className={s.descriptionBlock}>
+        <div className={s.content}>
+            <div className={s.avatar}>
                 {profile.photos && profile.photos.large
-                    ? <img src={profile.photos.large}/>
-                    : <img src={userPhoto}/>}
+                ? <img src={profile.photos.large}/>
+                : <img src={userPhoto}/>}
+            </div>
+            <div className={s.descriptionBlock}>
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-                {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={profile} />
+                {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
                         setEditMode(true)
                     }}/>
                 }
-
             </div>
             <div>{profile.fullName}</div>
             <ProfileStatusWithHooks status={status} updateStatusProfile={updateStatusProfile}/>

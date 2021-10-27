@@ -2,6 +2,7 @@ import React from 'react';
 import {UsersType} from "../../redux/users-reducer";
 import Paginator from "../common/Paginator/Paginator";
 import User from './User/User';
+import style from './Users.module.css'
 
 type UsersPresentType = {
     totalUsersCount: number,
@@ -15,7 +16,7 @@ type UsersPresentType = {
 }
 
 let Users: React.FC<UsersPresentType> = ({currentPage, totalUsersCount, pageSize, onPageChanged, ...props}) => {
-    return <div>
+    return <div className={style.content}>
         <Paginator currentPage={currentPage} onPageChanged={onPageChanged} pageSize={pageSize}
                    totalItemCount={totalUsersCount}/>
         {

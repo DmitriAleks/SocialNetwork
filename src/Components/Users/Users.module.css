@@ -1,4 +1,7 @@
-
+.content{
+    height: max-content;
+    background-color: #aac9ff;
+}
 .userPhoto {
     width: 100px;
     height: 120px;
