@@ -1,12 +1,18 @@
 .nav {
     grid-area: n;
-    background-color: greenyellow;
+    background-color: #eae252;
     padding: 20px;
 }
-.item a{
+
+.item a {
+    font-family: var(--family);
+    font-size: 20px;
+    line-height: normal;
     color: white;
     text-decoration: none;
+    margin-bottom: 55px;
 }
+
 .item a.active {
     color: black;
 }
