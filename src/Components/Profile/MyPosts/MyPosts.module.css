@@ -1,9 +1,36 @@
 .postsBlock {
     padding: 10px;
-    background-color: cornflowerblue;
+    background-color: #cfe1ef;
     width: 100%;
     margin-left: 10px;
+    box-shadow: 5px 5px #916ded;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.postsBlock h3{
+    font-family: var(--family);
+    font-size: 20px;
+    color: #1e2078;
+    text-decoration: underline;
 }
 .posts {
     margin-top: 10px;
+}
+.content {
+    background-color: #fafaff;
+    width: 90%;
+    height: 80%;
+    border-radius: 10px;
+    padding: 5px;
+}
+.textarea {
+    width: 90%;
+    resize: none;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: lightyellow;
+
 }

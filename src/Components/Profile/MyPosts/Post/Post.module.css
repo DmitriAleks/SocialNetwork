@@ -1,8 +1,39 @@
+
+.item {
+    color: black;
+    background-color: #1e2078;
+    margin: 10px 5px 5px 5px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+
 .item img {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     border-radius: 30px;
 }
-.item {
-    color: greenyellow;
+
+.message {
+    background-color: white;
+    width: 88%;
+    border-radius: 5px;
+    display: flex;
+
+}
+
+.likes {
+    padding-right: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.likes span{
+  color: lemonchiffon;
+}
+.likes img {
+    width: 20px;
+    height: 20px;
 }
