@@ -23,8 +23,8 @@
     padding-left: 10px;
 }
 .aboutMe {
-    background-color: #cfe1ef;
+    background-color: var(--winColor);
     padding: 5px;
     border-radius: 20px;
-    box-shadow: 5px 5px #916ded;
+    box-shadow: var(--winShadow)
 }

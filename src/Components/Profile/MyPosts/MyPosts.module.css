@@ -1,9 +1,9 @@
 .postsBlock {
     padding: 10px;
-    background-color: #cfe1ef;
+    background-color: var(--winColor);
     width: 100%;
     margin-left: 10px;
-    box-shadow: 5px 5px #916ded;
+    box-shadow: var(--winShadow);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
     background-color: #fafaff;
     width: 90%;
     height: 80%;
-    border-radius: 10px;
+    border-radius: var(--winBorder);;
     padding: 5px;
 }
 .textarea {

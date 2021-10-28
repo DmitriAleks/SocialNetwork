@@ -14,5 +14,8 @@ code {
 }
 :root {
   --family: Cantarell;
-  --lowercase: 'Arimo', sans-serif;;
+  --lowercase: 'Arimo', sans-serif;
+  --winColor: #cfe1ef;
+  --winShadow: 5px 5px #916ded;
+  --winBorder: 10px;
 }
