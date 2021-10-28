@@ -47,16 +47,15 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
                 ? <img src={profile.photos.large}/>
                 : <img src={userPhoto}/>}
             </div>
-            <div className={s.descriptionBlock}>
                 {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
+            <div className={s.aboutMe}>
                 {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
                         setEditMode(true)
                     }}/>
                 }
-            </div>
-            <div>{profile.fullName}</div>
             <ProfileStatusWithHooks status={status} updateStatusProfile={updateStatusProfile}/>
+            </div>
         </div>
     )
 }
@@ -65,7 +64,7 @@ type ContactType = {
     contactValue: string
 }
 export const Contact: React.FC<ContactType> = ({contactTitle, contactValue}) => {
-    return <div className={s.contact}><b>{contactTitle}</b>:{contactValue}</div>
+    return <div className={s.contact}><b>{contactTitle}:</b>{contactValue}</div>
 }
 type ProFileDataType = {
     profile: ProfileUserType,
@@ -74,28 +73,28 @@ type ProFileDataType = {
 }
 const ProfileData: React.FC<ProFileDataType> = ({profile, isOwner, goToEditMode}) => {
     return (
-        <div>
+        <div className={s.profileData}>
             {isOwner && <div>
                 <button onClick={goToEditMode}>edit</button>
             </div>}
             <div>
-                <b>Full name </b>: {profile.fullName}
+                <b>Full name :</b> {profile.fullName}
             </div>
             <div>
-                <b>Looking for a job </b>: {profile.lookingForAJob ? 'yes' : 'no'}
+                <b>Looking for a job :</b> {profile.lookingForAJob ? 'yes' : 'no'}
             </div>
             {profile.lookingForAJob &&
             <div>
-                <b>My professional skills </b>: {profile.lookingForAJobDescription}
+                <b>My professional skills :</b> {profile.lookingForAJobDescription}
             </div>
             }
             <div>
-                <b>About me </b>: {profile.aboutMe}
+                <b>About me :</b> {profile.aboutMe}
             </div>
             <div>
                 {profile.contacts &&
                 <div>
-                    <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+                    <b>Contacts:</b> {Object.keys(profile.contacts).map(key => {
                     return <Contact key={key} contactTitle={key} contactValue={key}/>
                 })}
                 </div>

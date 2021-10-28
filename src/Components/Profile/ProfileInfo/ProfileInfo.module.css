@@ -2,15 +2,29 @@
     width: 300px;
     height: 300px;
 }
-
 .avatar img{
     width: 240px;
     height: 240px;
-    border-image: inherit;
+    border-radius: 120px;
+}
+.profileData div{
+    color: #1e2078;
+    font-family: var(--lowercase);
+    font-size: 16px;
 }
 .descriptionBlock {
+}
+.profileData div b{
+    font-family: var(--family);
+    font-size: 18px;
 }
 
 .contact {
     padding-left: 10px;
+}
+.aboutMe {
+    background-color: #cfe1ef;
+    padding: 5px;
+    border-radius: 20px;
+    box-shadow: 5px 5px #916ded;
 }
