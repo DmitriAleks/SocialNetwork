@@ -32,11 +32,7 @@ let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 class App extends React.Component<AppMapStateAndDispatchPropsType> {
     catchAllUnhandledErrors = (promiseRejectionEvent: any) => {
         alert('Some error')
-        console.log(promiseRejectionEvent)
     }
-
-
-
     componentDidMount() {
         this.props.initializedApp();
         window.addEventListener("unhandledrejection", function (promiseRejectionEvent) {
@@ -48,18 +44,16 @@ class App extends React.Component<AppMapStateAndDispatchPropsType> {
             // handle error here, for example log
         });
     }
-
     render() {
         if (!this.props.initialized) {
-            return <Preloader/>
-        }
+            return <Preloader/>}
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
                     <Switch>
-                        <Route exact path='/' render={() => <Redirect to={'/profile'}/>}/>
+                        <Route exact path='/' render={() => <Redirect to={'/login'}/>}/>
                         <Route path='/dialogs' render={() => {
                             return <React.Suspense fallback={<Preloader/>}>
                                 <DialogsContainer/>
@@ -83,11 +77,6 @@ class App extends React.Component<AppMapStateAndDispatchPropsType> {
         );
     }
 }
-
-// export default compose<React.ComponentType>(
-//     withRouter,
-//     connect(null, {getAuthUserData})(App));
-// basename={process.env.PUBLIC_URL}
 let AppContainer = connect(mapStateToProps, {initializedApp})(App);
 
 export const SamuraiJSApp = () => {

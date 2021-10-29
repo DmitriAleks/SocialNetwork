@@ -15,6 +15,7 @@ type ProfileType = {
 }
 
 const Profile = (props: ProfileType) => {
+
     return (
         <div className={style.test}>
             <ProfileInfo isOwner={props.isOwner} saveProfile={props.saveProfile} updatePhoto={props.updatePhoto}

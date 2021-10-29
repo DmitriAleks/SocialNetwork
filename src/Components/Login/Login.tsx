@@ -7,6 +7,8 @@ import {login} from '../../redux/auth-reducer';
 import {Redirect} from 'react-router-dom';
 import {AppStateType} from "../../redux/redux-store";
 import style from '../common/FormControls/FormsControls.module.css'
+import s from './Login.module.css'
+import btn from './../../assets/styles/ButtonStyle.module.css'
 
 type FormDataType = {
     email: string,
@@ -18,7 +20,7 @@ let maxLength25 = maxLengthCreator(25)
 const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     const captcha = useSelector<AppStateType, string>(state => state.auth.captchaUrl)
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={s.formBlock}>
             <div>
                 <Field placeholder={'Email'} name={'email'} component={Input} validate={[required, maxLength25]}/>
             </div>
@@ -37,8 +39,8 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, err
                 {error}
             </div>
             }
-            <div>
-                <button>Login</button>
+            <div className={s.button}>
+                <button className={btn.btn}>Login</button>
             </div>
         </form>
     )
@@ -57,9 +59,12 @@ const Login = (props: any) => { //any
     if (props.isAuth) {
         return <Redirect to={'/profile'}/>
     }
-    return <div>
-        <h1>Login</h1>
-        <LoginReduxForm onSubmit={onSubmit}/>
+    return <div className={s.content}>
+        <div>
+            <h1>Welcome</h1>
+            <h2>Login</h2>
+            <LoginReduxForm onSubmit={onSubmit}/>
+        </div>
     </div>
 }
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {

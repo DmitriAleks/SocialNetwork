@@ -26,6 +26,7 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
                                                     updatePhoto,
                                                     saveProfile
                                                 }) => {
+
     const [editMode, setEditMode] = useState(false)
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
@@ -36,7 +37,6 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
         await saveProfile(formData)
         setEditMode(false)
     }
-    console.log(profile.contacts)
     if (!profile) {
         return <Preloader/>
     }

@@ -1,0 +1,68 @@
+.content {
+    margin-top: 2%;
+    margin-left: 20%;
+    background-color: var(--winColor);
+    width: 300px;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: var(--winShadow);
+}
+
+.content div {
+    background-color: #fafaff;
+    width: 90%;
+    height: 90%;
+    border-radius: 10px;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.content h1 {
+    font-family: var(--family);
+    color: #1e2078;
+    font-size: 40px;
+}
+
+.content h2 {
+    font-family: var(--family);
+    text-decoration: underline;
+    color: #1e2078;
+    font-size: 30px;
+}
+
+.button button {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.formBlock div {
+    color: #8f8fa1;
+}
+
+.formBlock div input {
+    margin-top: 5px;
+    height: 40px;
+    position: relative;
+    display: block;
+    width: 100%;
+    background: #fff;
+    border-radius: 31px;
+    font-family: var(--lowercase);
+    font-size: 16px;
+    color: #8f8fa1;
+    line-height: 1.2;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+}
+
+.formBlock div input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+
+}

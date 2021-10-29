@@ -1,3 +1,15 @@
+.section{
+}
+.section button{
+    background-color: var(--winColor);
+    border-radius: 10px;
+    box-shadow: 2px 2px #916ded;
+}
+.pageNumber {
+    margin: 1px;
+    border: 1px solid #5e5a5a;
+}
 .selectedPage {
     font-weight: bold;
+    border: 2px solid #000000;
 }
