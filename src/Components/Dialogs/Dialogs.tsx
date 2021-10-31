@@ -1,5 +1,5 @@
 import React from "react";
-import s from './Dialogs.module.css'
+import style from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {DialogsPropsType} from "./DialogsContainer";
@@ -13,8 +13,6 @@ const Dialogs = (props: DialogsPropsType) => {
     let messagesElements = state.messages.map(m => <Message message={m.message} key={m.id} id={m.id}/>)
 
 
-
-
     let addNewMessage = (values: FormDataDialogsType) => {
         props.sendMessage(values.newMessageBody)
     }
@@ -22,16 +20,24 @@ const Dialogs = (props: DialogsPropsType) => {
     if (!props.isAuth) return <Redirect to={'/login'}/>;
 
     return (
-        <div>
-            <div className={s.dialogs}>
-                <div className={s.dialogsItems}>
+        <div className={style.container}>
+
+            <div className={style.content}>
+
+                <div className={style.messages}>
+
+                    <span className={style.dialogsItems}>
                     {dialogsElements}
+                </span>
+                    <div >
+                        <div>{messagesElements}</div>
+                    </div>
+
                 </div>
-                <div className={s.messages}>
-                    <div>{messagesElements}</div>
-                </div>
+                <AddMessageFormRedux onSubmit={addNewMessage}/>
+
             </div>
-            <AddMessageFormRedux onSubmit={addNewMessage}/>
+
         </div>
     )
 

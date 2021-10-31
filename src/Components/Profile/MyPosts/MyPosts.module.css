@@ -24,6 +24,7 @@
     height: 80%;
     border-radius: var(--winBorder);;
     padding: 5px;
+    overflow: auto;
 }
 .textarea {
     width: 90%;

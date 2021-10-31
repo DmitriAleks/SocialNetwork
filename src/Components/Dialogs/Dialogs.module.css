@@ -1,20 +1,29 @@
-.dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10%;
+    background-color: var(--winColor);
+    box-shadow: var(--winShadow);
+    height: 100%;
+    width: 80%;
+    border-radius: var(--winBorder);
 }
 
-.dialogsItems .dialog {
-    padding: 10px;
-}
-.dialogsItems .active {
-    color : gold;
+.content {
+    background-color: #720a0a;
+    height: 95%;
+    width: 95%;
 }
 .messages {
-    padding: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.dialogs {
 
 }
 
-.messages .message {
-    padding: 10px;
+.dialog a {
+    text-decoration: none;
 }
-
