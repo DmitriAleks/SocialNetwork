@@ -1,6 +1,7 @@
 import React from "react";
 import {Input, Textarea} from "../../common/FormControls/FormsControls";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import btn from './../../../assets/styles/ButtonStyle.module.css'
 
 export type ProfileDataFormType = {
     fullName: string
@@ -9,14 +10,11 @@ export type ProfileDataFormType = {
     aboutMe: string
 }
 
-//34
 const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormType>> = ({handleSubmit}) => {
-
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <button>save
-                </button>
+                <button className={btn.btn}>save</button>
             </div>
             <b>Full name</b>: <Field placeholder={'fullName'} name={'fullName'}
                                      component={Input}/>
@@ -34,18 +32,8 @@ const ProfileDataForm: React.FC<InjectedFormProps<ProfileDataFormType>> = ({hand
                                          name={'aboutMe'}
                                          component={Textarea}/>
             </div>
-            {/*<div>*/}
-            {/*    {profile.contacts &&*/}
-            {/*    <div>*/}
-            {/*        <b>Contacts</b>: {Object.keys(profile.contacts).map(key => {*/}
-            {/*        return <Contact key={key} contactTitle={key} contactValue={key}/>*/}
-            {/*    })}*/}
-            {/*    </div>*/}
-            {/*    }*/}
-            {/*</div>*/}
         </form>
     )
-
 }
 //@ts-ignore
 const ProfileDataFormReduxForm = reduxForm<ProfileDataFormType>({form: 'edit-profile'})(ProfileDataForm)

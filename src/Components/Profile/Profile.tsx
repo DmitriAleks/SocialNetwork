@@ -2,7 +2,7 @@ import React from 'react';
 import style from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/Profileinfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {ProfileUserType, updateStatusProfile} from "../../redux/profile-reducer";
+import {ProfileUserType} from "../../redux/profile-reducer";
 import {ProfileDataFormType} from "./ProfileInfo/ProfileDataForm";
 
 type ProfileType = {
@@ -15,7 +15,6 @@ type ProfileType = {
 }
 
 const Profile = (props: ProfileType) => {
-
     return (
         <div className={style.test}>
             <ProfileInfo saveProfile={props.saveProfile} updatePhoto={props.updatePhoto} currentUser={props.currentUser}

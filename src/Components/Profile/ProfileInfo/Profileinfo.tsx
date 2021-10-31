@@ -1,11 +1,11 @@
-import React, {ChangeEventHandler, useEffect, useState} from "react";
-import s from './ProfileInfo.module.css';
+import React, {useEffect, useState} from "react";
+import style from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
-import {ProfileContactUserType, ProfileUserType} from "../../../redux/profile-reducer";
+import {ProfileUserType} from "../../../redux/profile-reducer";
 import userPhoto from '../../../assets/images/user.png';
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
-import ProfileDataForm, {ProfileDataFormType} from "./ProfileDataForm";
-import ProfileDataFormReduxForm from "./ProfileDataForm";
+import ProfileDataFormReduxForm, {ProfileDataFormType} from "./ProfileDataForm";
+import btn from './../../../assets/styles/ButtonStyle.module.css'
 
 
 type ProfileInfoType = {
@@ -26,8 +26,6 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
                                                     saveProfile,
                                                     currentUser
                                                 }) => {
-    debugger
-
     useEffect(()=>{
         if(currentUser != profile.userId) {
             setIsOwner(false)
@@ -50,14 +48,14 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
     }
 
     return (
-        <div className={s.content}>
-            <div className={s.avatar}>
+        <div className={style.content}>
+            <div className={style.avatar}>
                 {profile.photos && profile.photos.large
                     ? <img src={profile.photos.large}/>
                     : <img src={userPhoto}/>}
             </div>
-            {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
-            <div className={s.aboutMe}>
+            {editMode && <input  type={'file'} onChange={onMainPhotoSelected}/>}
+            <div className={style.aboutMe}>
                 {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
                         setEditMode(true)
@@ -73,7 +71,7 @@ type ContactType = {
     contactValue: string
 }
 export const Contact: React.FC<ContactType> = ({contactTitle, contactValue}) => {
-    return <div className={s.contact}><b>{contactTitle}:</b>{contactValue}</div>
+    return <div className={style.contact}><b>{contactTitle}:</b>{contactValue}</div>
 }
 type ProFileDataType = {
     profile: ProfileUserType,
@@ -82,9 +80,9 @@ type ProFileDataType = {
 }
 const ProfileData: React.FC<ProFileDataType> = ({profile, isOwner, goToEditMode}) => {
     return (
-        <div className={s.profileData}>
+        <div className={style.profileData}>
             {isOwner && <div>
-                <button onClick={goToEditMode}>edit</button>
+                <button className={btn.btn} onClick={goToEditMode}>edit</button>
             </div>}
             <div>
                 <b>Full name :</b> {profile.fullName}
@@ -111,7 +109,6 @@ const ProfileData: React.FC<ProFileDataType> = ({profile, isOwner, goToEditMode}
             </div>
         </div>
     )
-
 }
 
 export default ProfileInfo;

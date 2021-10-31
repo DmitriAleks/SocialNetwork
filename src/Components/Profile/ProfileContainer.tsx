@@ -9,9 +9,11 @@ import {
     updatePhotoProfile, saveProfileTC
 } from "../../redux/profile-reducer";
 import {AppStateType} from "../../redux/redux-store";
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from 'redux';
 import {ProfileDataFormType} from "./ProfileInfo/ProfileDataForm";
+import Preloader from "../common/Preloader/Preloader";
+import {log} from "util";
 
 type MapStateToPropsType = {
     profile: ProfileUserType,
@@ -37,13 +39,6 @@ class ProfileContainer extends React.Component<PropsType> {
 
     refreshProfile() {
         let userId = this.props.match.params.userId;
-        // if(!userId) {
-        //     this.props.history.push('/login');
-        //     userId = this.props.authorizedUsedId;
-        //     if(!userId) {
-        //         this.props.history.push('/login');
-        //     }
-        // }
         this.props.getUserProfile(userId);
         this.props.getStatusProfile(userId);
     }
@@ -51,6 +46,7 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         this.refreshProfile();
+
     }
 
     componentDidUpdate(prevProps: Readonly<PropsType>, prevState: Readonly<{}>, snapshot?: any) {
@@ -59,8 +55,13 @@ class ProfileContainer extends React.Component<PropsType> {
         }
     }
 
-    render() {
 
+
+    render() {
+        debugger
+        if (!this.props.profile) {
+            <Redirect to="/login" />
+        }
         return (
 
             <Profile profile={this.props.profile}
@@ -72,7 +73,6 @@ class ProfileContainer extends React.Component<PropsType> {
             />
         )
     }
-
 }
 
 
