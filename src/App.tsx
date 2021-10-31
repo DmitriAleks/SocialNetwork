@@ -26,7 +26,7 @@ type MapDispatchToPropsType = {
     initializedApp: () => void,
 }
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
 })
 
 class App extends React.Component<AppMapStateAndDispatchPropsType> {
@@ -50,7 +50,7 @@ class App extends React.Component<AppMapStateAndDispatchPropsType> {
         return (
             <div className='app-wrapper'>
                 <HeaderContainer/>
-                <Navbar/>
+              <Navbar/>
                 <div className='app-wrapper-content'>
                     <Switch>
                         <Route exact path='/' render={() => <Redirect to={'/login'}/>}/>

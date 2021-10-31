@@ -50,6 +50,7 @@ const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 type MapStateToPropsType = {
     isAuth: boolean
     captchaUrl: string
+    userId: number | null
 }
 const Login = (props: any) => { //any
     const onSubmit = (formData: FormDataType) => {
@@ -57,7 +58,7 @@ const Login = (props: any) => { //any
         props.login(email, password, rememberMe)
     }
     if (props.isAuth) {
-        return <Redirect to={'/profile'}/>
+        return <Redirect to={'/profile/'+props.userId}/>
     }
     return <div className={s.content}>
         <div>
@@ -71,6 +72,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         isAuth: state.auth.isAuth,
         captchaUrl: state.auth.captchaUrl,
+        userId: state.auth.id
     }
 
 }

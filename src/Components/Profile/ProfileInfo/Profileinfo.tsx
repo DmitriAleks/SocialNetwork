@@ -43,9 +43,6 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
         await saveProfile(formData)
         setEditMode(false)
     }
-    if (!profile) {
-        return <Preloader/>
-    }
 
     return (
         <div className={style.content}>

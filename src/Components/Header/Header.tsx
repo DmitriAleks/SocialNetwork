@@ -1,5 +1,4 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
 import style from './Header.module.css';
 
 type HeaderType = {
@@ -14,9 +13,9 @@ const Header = (props: HeaderType) => {
             <div className={style.contentHeader}>
                 <span className={style.title}> Social Network</span>
                 <div className={style.menuLogin}>
-                    {props.isAuth
-                        ? <button onClick={props.logout}>{props.login} Log out </button>
-                        : <button> <NavLink to={'/login'}>Login</NavLink></button>}
+                    {props.isAuth &&
+                    <button onClick={props.logout}>{props.login} Log out </button>
+                    }
                 </div>
             </div>
         </header>

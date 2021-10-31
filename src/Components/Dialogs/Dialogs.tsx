@@ -19,7 +19,7 @@ const Dialogs = (props: DialogsPropsType) => {
         props.sendMessage(values.newMessageBody)
     }
 
-    if (!props.isAuth) return <Redirect to={'/login'}/>;//требует стартовый стейт, иначе undefined
+    if (!props.isAuth) return <Redirect to={'/login'}/>;
 
     return (
         <div>
