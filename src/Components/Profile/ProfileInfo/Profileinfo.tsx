@@ -1,4 +1,4 @@
-import React, {ChangeEventHandler, useState} from "react";
+import React, {ChangeEventHandler, useEffect, useState} from "react";
 import s from './ProfileInfo.module.css';
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileContactUserType, ProfileUserType} from "../../../redux/profile-reducer";
@@ -12,9 +12,9 @@ type ProfileInfoType = {
     profile: ProfileUserType
     status: string
     updateStatusProfile: (status: string) => void
-    isOwner: boolean
     updatePhoto: (e: any) => void
     saveProfile: (profile: ProfileDataFormType) => void
+    currentUser: number | null,
 }
 
 
@@ -22,11 +22,19 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
                                                     profile,
                                                     status,
                                                     updateStatusProfile,
-                                                    isOwner,
                                                     updatePhoto,
-                                                    saveProfile
+                                                    saveProfile,
+                                                    currentUser
                                                 }) => {
+    debugger
 
+    useEffect(()=>{
+        if(currentUser != profile.userId) {
+            setIsOwner(false)
+        } else setIsOwner(true)
+    },[profile])
+
+    const [isOwner, setIsOwner] = useState(false)
     const [editMode, setEditMode] = useState(false)
     const onMainPhotoSelected = (e: any) => {
         if (e.target.files.length) {
@@ -40,21 +48,22 @@ const ProfileInfo: React.FC<ProfileInfoType> = ({
     if (!profile) {
         return <Preloader/>
     }
+
     return (
         <div className={s.content}>
             <div className={s.avatar}>
                 {profile.photos && profile.photos.large
-                ? <img src={profile.photos.large}/>
-                : <img src={userPhoto}/>}
+                    ? <img src={profile.photos.large}/>
+                    : <img src={userPhoto}/>}
             </div>
-                {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
+            {isOwner && <input type={'file'} onChange={onMainPhotoSelected}/>}
             <div className={s.aboutMe}>
                 {editMode ? <ProfileDataFormReduxForm onSubmit={onSubmit} initialValues={profile}/>
                     : <ProfileData profile={profile} isOwner={isOwner} goToEditMode={() => {
                         setEditMode(true)
                     }}/>
                 }
-            <ProfileStatusWithHooks status={status} updateStatusProfile={updateStatusProfile}/>
+                <ProfileStatusWithHooks status={status} updateStatusProfile={updateStatusProfile}/>
             </div>
         </div>
     )
