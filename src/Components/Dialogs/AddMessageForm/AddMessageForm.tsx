@@ -2,6 +2,7 @@ import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Textarea} from "../../common/FormControls/FormsControls";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
+import btn from './../../../assets/styles/ButtonStyle.module.css'
 
 export type FormDataDialogsType = {
     newMessageBody: string,
@@ -15,7 +16,7 @@ const AddMessageForm: React.FC<InjectedFormProps<FormDataDialogsType>> = (props)
                        name={'newMessageBody'} placeholder='Enter your message'/>
             </div>
             <div>
-                <button>Send</button>
+                <button className={btn.btn}>Send</button>
             </div>
         </form>
     )

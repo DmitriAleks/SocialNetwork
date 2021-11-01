@@ -24,13 +24,16 @@ const Dialogs = (props: DialogsPropsType) => {
 
             <div className={style.content}>
 
-                <div className={style.messages}>
+                <div className={style.messagesBlock}>
 
                     <span className={style.dialogsItems}>
                     {dialogsElements}
                 </span>
-                    <div >
-                        <div>{messagesElements}</div>
+                    <div className={style.messages}>
+
+                        <div >{messagesElements}
+
+                        </div>
                     </div>
 
                 </div>

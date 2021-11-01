@@ -11,19 +11,52 @@
 }
 
 .content {
-    background-color: #720a0a;
+    background-color: #fbfbfb;;
     height: 95%;
     width: 95%;
+    overflow: auto;
 }
-.messages {
+.dialogsItems {
+    width: 30%;
+
+}
+.dialog {
+    min-height: 60px;
+    border-bottom: 1px solid black;
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #aac9ff;
+    letter-spacing: 2px;
 }
-
-.dialogs {
-
-}
-
 .dialog a {
     text-decoration: none;
+    font-family: var(--lowercase);
 }
+
+.messagesBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.messages {
+    text-align: end;
+    width: 75%;
+
+}
+
+.message {
+    padding:0 15px 0 15px;
+    min-height: 60px;
+    background-color: #e7e6db;
+    border-bottom: 1px solid black;
+    border-radius: 15px 15px 15px 0;
+    line-height: normal;
+    text-decoration: none;
+    font-family: var(--lowercase);
+    text-align: justify;
+
+}
+
